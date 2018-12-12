@@ -87,4 +87,4 @@ fos_user:
 gos_web_socket:
   server:
     port: 8080        #The port the socket server will listen on
-    host: 0.0.0.0   #The host ip to bind to
+    host: 127.0.0.1   #The host ip to bind to
