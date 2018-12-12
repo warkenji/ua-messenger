@@ -2,3 +2,8 @@ services:
 #    u_aplatform.example:
 #        class: UA\UAplatformBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+  ua.room_service:
+    class: UA\UAplatformBundle\Room\UARoom
+    tags:
+      - { name: gos_web_socket.topic }

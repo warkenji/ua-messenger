@@ -7,27 +7,44 @@
 <script src="{{ asset('bundles/goswebsocket/js/gos_web_socket_client.js') }}"></script>
     <script>
         $(document).ready(() => {
-            const webSocket = WS.connect("ws://ua-messenger.herokuapp.com:8888");
-        const validation = $("<p/>");
+            const webSocket = WS.connect("ws://127.0.0.1:8888");
+        const status = $("#status");
+        const message = $("#message");
+        const input = $("#input");
 
-            validation.html("En attente");
+            status.html("Status: En attente");
 
-        $(document.body).append(validation);
+        $(document.body).append(status);
 
         webSocket.on("socket/connect", function (session) {
-        //session is an Autobahn JS WAMP session.
-
-            validation.text("Successfully Connected!");
+            status.text("Successfully Connected!");
         });
 
         webSocket.on("socket/disconnect", function (error) {
-        //error provides us with some insight into the disconnection: error.reason and error.code
+            status.text("Disconnected for " + error.reason + " with code " + error.code);
+        });
 
-            validation.text("Disconnected for " + error.reason + " with code " + error.code);
+        webSocket.on("socket/connect", function (session) {
+
+            input.find("button").on("click", () => {
+                session.publish("ua/channel", input.find("input").val());
+                input.find("input").val("");
+            });
+
+            //the callback function in "subscribe" is called everytime an event is published in that channel.
+            session.subscribe("ua/channel", function (uri, payload) {
+                message.html(message.html() + payload.data + "<br />");
+            });
         });
     });
     </script>
 </head>
 <body>
+<div id="status">Status:</div>
+<div id="message"></div>
+<div id="input">
+    <input type="text">
+    <button>Envoyer</button>
+</div>
 </body>
 </html>

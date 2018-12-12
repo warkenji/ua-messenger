@@ -1,0 +1,4 @@
+ua_room:
+    channel: ua/channel
+    handler:
+        callback: 'ua.room' #related to the getName() of your topic
