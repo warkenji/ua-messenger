@@ -1,0 +1,3 @@
+u_aplatform_homepage:
+    path:     /
+    defaults: { _controller: UAplatformBundle:Default:index }

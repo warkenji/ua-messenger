@@ -2,11 +2,12 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@UAplatformBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi: ~
@@ -18,6 +19,8 @@ framework:
     form: ~
     csrf_protection: ~
     validation: { enable_annotations: true }
+    templating:
+        engines: ['twig']
     #serializer: { enable_annotations: true }
     default_locale: '%locale%'
     trusted_hosts: ~
@@ -39,7 +42,7 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver: pdo_mysql
+        driver: pdo_pgsql
         host: '%database_host%'
         port: '%database_port%'
         dbname: '%database_name%'
@@ -69,3 +72,14 @@ swiftmailer:
 sensio_framework_extra:
    router:
         annotations: false
+
+fos_user:
+    db_driver:     orm                       # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
+    firewall_name: main                      # Le nom du firewall derrière lequel on utilisera ces utilisateurs
+    user_class:    UA\UserBundle\Entity\Utilisateur # La classe de l'entité User que nous utilisons
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+    registration:
+        form:
+            type: UA\UserBundle\Form\RegistrationFormType

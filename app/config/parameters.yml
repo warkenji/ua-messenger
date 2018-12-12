@@ -7,6 +7,6 @@ parameters:
     database_password: 93a9537afeade8c2a29cd4ec46e1e316d6acef8c3feb805091e962c088b52c51
     mailer_transport: smtp
     mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    mailer_user: test
+    mailer_password: test
     secret: ThisTokenIsNotSoSecretChangeIt

@@ -1,0 +1,4 @@
+services:
+#    u_aplatform.example:
+#        class: UA\UAplatformBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
