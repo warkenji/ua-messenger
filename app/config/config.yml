@@ -83,3 +83,8 @@ fos_user:
     registration:
         form:
             type: UA\UserBundle\Form\RegistrationFormType
+
+gos_web_socket:
+  server:
+    port: 8080        #The port the socket server will listen on
+    host: 0.0.0.0   #The host ip to bind to
