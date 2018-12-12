@@ -87,4 +87,4 @@ fos_user:
 gos_web_socket:
   server:
     port: 8080        #The port the socket server will listen on
-    host: ua-messenger.herokuapp.com   #The host ip to bind to
+    host: 0.0.0.0   #The host ip to bind to
