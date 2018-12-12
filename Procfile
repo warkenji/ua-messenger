@@ -1,2 +1,3 @@
 web: vendor/bin/heroku-php-apache2 web/
-worker: php bin/console gos:websocket:server
+stunnel-worker: bin/start-stunnel
+socket-worker: php bin/console gos:websocket:server
