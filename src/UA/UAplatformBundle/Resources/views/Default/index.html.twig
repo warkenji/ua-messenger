@@ -1,1 +1,33 @@
-Hello World!
+<!DOCTYPE>
+<html LANG="fr">
+<head>
+    <title>UA Messenger</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{{ asset('bundles/goswebsocket/js/vendor/autobahn.min.js') }}"></script>
+<script src="{{ asset('bundles/goswebsocket/js/gos_web_socket_client.js') }}"></script>
+    <script>
+        $(document).ready(() => {
+            const webSocket = WS.connect("ws://ua-messenger.herokuapp.com:8080");
+        const validation = $("<p/>");
+
+            validation.html("En attente");
+
+        $(document.body).append(validation);
+
+        webSocket.on("socket/connect", function (session) {
+        //session is an Autobahn JS WAMP session.
+
+            validation.text("Successfully Connected!");
+        });
+
+        webSocket.on("socket/disconnect", function (error) {
+        //error provides us with some insight into the disconnection: error.reason and error.code
+
+            validation.text("Disconnected for " + error.reason + " with code " + error.code);
+        });
+    });
+    </script>
+</head>
+<body>
+</body>
+</html>
