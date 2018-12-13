@@ -25,18 +25,20 @@
 
 <body class="text-center">
 
-{% if error %}
 
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-
-{% endif %}
 
 <div class="form-signin">
     <img alt="" class="mb-4 logo" src="{{ asset('bundles/user/img/logo.png') }}">
 
     <h1 class="h3 mb-3 font-weight-normal">Veuillez-vous enregister</h1>
 
+    <div class="alert alert-danger">
+        {% if error %}
 
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+
+        {% endif %}
+    </div>
 
     <form action="{{ path('fos_user_security_check') }}" class="form-inline" method="post">
         {% if csrf_token %}
