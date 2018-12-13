@@ -1,0 +1,87 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+.form-signin .checkbox {
+    font-weight: 400;
+}
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-radius: 2em;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-radius: 2em;
+}
+
+.logo{
+    height: 120px;
+}
+
+.btn-outline-primary{
+    border-radius: 2em;
+    color: #111755;
+    border-color: #111755;
+    font-size: 14px;
+}
+
+.btn-outline-primary:hover{
+    background: #111755;
+    border-color: white;
+}
+
+.input-group-text {
+    height: 46px !important;
+    border-radius: 2em;
+    padding-left: 18px;
+}
+.input-group-prepend {
+    margin-right: -1px;
+    position: absolute;
+    z-index: 3;
+}
+
+
+.input-group > :last-child.input-group-append > :not(:last-child):not(.dropdown-toggle).btn, .input-group > :last-child.input-group-append > :not(:last-child).input-group-text, .input-group > :not(:last-child).input-group-append > .btn, .input-group > :not(:last-child).input-group-append > .input-group-text, .input-group > .input-group-prepend > .btn, .input-group > .input-group-prepend > .input-group-text {
+    border-radius: 2em;
+}
+
+i{
+    color: #0086cb;
+}
+
+
+.input-group > :not(:first-child).custom-select, .input-group > :not(:first-child).form-control {
+    border-bottom-left-radius: 2em;
+    border-top-left-radius: 2em;
+    padding-left: 50px;
+}
+
+
