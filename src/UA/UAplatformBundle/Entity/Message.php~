@@ -3,7 +3,6 @@
 namespace UA\UAplatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use UA\UserBundle\Entity\Utilisateur;
 
 /**
  * Message
@@ -43,10 +42,10 @@ class Message
      */
     private $typeMessage;
     /**
-    * @ORM\ManyToOne(targetEntity="UA\UserBundle\Entity\Utilisateur", cascade={"persist"},inversedBy="messages")
+    * @ORM\ManyToOne(targetEntity="UA\UserBundle\Entity\User", cascade={"persist"},inversedBy="messages")
     * @ORM\JoinColumn(nullable=false)
     */
-    private $utilisateur;
+    private $user;
 
 
     /**
@@ -132,26 +131,26 @@ class Message
     }
 
     /**
-     * Set Utilisateur
+     * Set user
      *
-     * @param Utilisateur $utilisateur
+     * @param UA\UAplatfomBundle\Entity\User $user
      *
      * @return Message
      */
-    public function setUtilisateur(Utilisateur $utilisateur)
+    public function setUser(UA\UserBundle\Entity\User $user)
     {
-        $this->utilisateur = $utilisateur;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get Utilisateur
+     * Get user
      *
-     * @return Utilisateur
+     * @return UA\UserBundle\Entity\User
      */
-    public function getUtilisateur()
+    public function getUser()
     {
-        return $this->utilisateur;
+        return $this->user;
     }
 }
