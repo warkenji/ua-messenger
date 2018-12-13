@@ -32,13 +32,12 @@
 
     <h1 class="h3 mb-3 font-weight-normal">Veuillez-vous enregister</h1>
 
-    <div class="alert alert-danger">
+
         {% if error %}
-
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-
+            <div class="alert alert-danger">
+                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            </div>
         {% endif %}
-    </div>
 
     <form action="{{ path('fos_user_security_check') }}" class="form-inline" method="post">
         {% if csrf_token %}
