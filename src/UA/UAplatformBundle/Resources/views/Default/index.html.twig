@@ -12,9 +12,7 @@
         const message = $("#message");
         const input = $("#input");
 
-            status.html("Status: En attente");
-
-        $(document.body).append(status);
+        status.html("Status: En attente");
 
         webSocket.on("socket/connect", function (session) {
             status.text("Successfully Connected!");
@@ -33,7 +31,7 @@
 
             //the callback function in "subscribe" is called everytime an event is published in that channel.
             session.subscribe("ua/channel", function (uri, payload) {
-                message.html(message.html() + payload.data + "<br />");
+                message.append("<p>" + payload.data + "</p>");
             });
         });
     });

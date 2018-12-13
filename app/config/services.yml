@@ -17,3 +17,18 @@ services:
         class: UA\UserBundle\Form\RegistrationFormType
         tags:
             - { name: form.type}
+
+    pdo:
+        class: PDO
+        arguments:
+            - 'pgsql:host=%database_host%;port=%database_port%;dbname=%database_name%'
+            - '%database_user%'
+            - '%database_password%'
+        calls:
+            - [ setAttribute, [3, 2] ] # \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION
+
+    session.handler.pdo:
+        class:  Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        arguments:
+            - !service { class: PDO, factory: 'database_connection:getWrappedConnection' }
+            - {lock_mode: 0}

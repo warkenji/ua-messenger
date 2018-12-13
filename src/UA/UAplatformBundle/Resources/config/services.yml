@@ -5,5 +5,7 @@ services:
 
   ua.room_service:
     class: UA\UAplatformBundle\Room\UARoom
+    arguments:
+      - '@gos_web_socket.websocket.client_manipulator'
     tags:
       - { name: gos_web_socket.topic }
