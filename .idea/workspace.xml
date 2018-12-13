@@ -1,25 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1568daec-f31b-4526-a4ec-eeb512bfb343" name="Default Changelist" comment="ajout des Entité Groupe, Note, Suggestion">
-      <change afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Entity/Groupe.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Entity/Message.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Entity/Note.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Entity/Suggestion.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Repository/GroupeRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Repository/MessageRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Repository/NoteRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Repository/SuggestionRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ua-messenger.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ua-messenger.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AppKernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AppKernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UA/UAplatformBundle/Resources/views/Default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Resources/views/Default/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UA/UserBundle/Entity/Utilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UA/UserBundle/Entity/Utilisateur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UA/UserBundle/Resources/views/Security/login.html.twig" beforeDir="false" />
+    <list default="true" id="1568daec-f31b-4526-a4ec-eeb512bfb343" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/UA/UserBundle/Resources/views/Security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UA/UserBundle/Resources/public/css/bootstrap-grid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UA/UserBundle/Resources/public/css/bootstrap-grid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UA/UserBundle/Resources/public/css/bootstrap-reboot.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UA/UserBundle/Resources/public/css/bootstrap-reboot.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UA/UserBundle/Resources/public/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UA/UserBundle/Resources/public/css/bootstrap.min.css" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +88,7 @@
         <entry file="file://$PROJECT_DIR$/src/UA/UAplatformBundle/Entity/Groupe.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
-              <caret line="10" column="45" lean-forward="true" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
+              <caret line="10" column="45" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -366,6 +355,16 @@
               <item name="Resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="views" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
+            <path>
+              <item name="ua-messenger" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="UA" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="UserBundle" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="views" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Security" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -417,7 +416,7 @@
       <option name="presentableId" value="Default" />
       <updated>1544615168857</updated>
       <workItem from="1544615172609" duration="23714000" />
-      <workItem from="1544711894743" duration="1742000" />
+      <workItem from="1544711894743" duration="2340000" />
     </task>
     <task id="LOCAL-00001" summary="modification Procfile">
       <created>1544620942936</created>
@@ -503,11 +502,18 @@
       <option name="project" value="LOCAL" />
       <updated>1544628584808</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="ajout des Entité Groupe, Note, Suggestion">
+      <created>1544713669613</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1544713669614</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29493000" />
+    <option name="totallyTimeSpent" value="30091000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
@@ -517,15 +523,15 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32894737" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32894737" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32894737" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32894737" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32894737" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.33004385" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.33004385" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -712,7 +718,7 @@
     <entry file="file://$PROJECT_DIR$/src/UA/UAplatformBundle/Entity/Groupe.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
-          <caret line="10" column="45" lean-forward="true" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
+          <caret line="10" column="45" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
         </state>
       </provider>
     </entry>
