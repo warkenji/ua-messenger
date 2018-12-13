@@ -93,3 +93,9 @@ gos_web_socket:
     client:
         firewall: main
         session_handler: '@session.handler.pdo'
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~

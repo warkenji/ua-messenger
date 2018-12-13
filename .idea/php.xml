@@ -63,7 +63,13 @@
       <path value="$PROJECT_DIR$/vendor/gos/websocket-client" />
       <path value="$PROJECT_DIR$/vendor/gos/pnctl-event-loop-emitter" />
       <path value="$PROJECT_DIR$/vendor/gos/web-socket-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/reflection" />
+      <path value="$PROJECT_DIR$/vendor/snc/redis-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/assetic-bundle" />
+      <path value="$PROJECT_DIR$/vendor/kriswallsmith/assetic" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="5.5.0" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
 </project>

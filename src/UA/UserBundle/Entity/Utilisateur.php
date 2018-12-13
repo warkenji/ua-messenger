@@ -1,9 +1,12 @@
 <?php
 
-namespace UA\UserBundle\Entity;
+namespace UA\UtilisateurBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use UA\UAplatformBundle\Entity\Groupe;
+use UA\UAplatformBundle\Entity\Message;
+use UA\UAplatformBundle\Entity\Suggestion;
 
 /**
  * Utilisateur
@@ -49,6 +52,28 @@ class Utilisateur extends BaseUser
      * @ORM\Column(name="adresse", type="string", length=255)
      */
     private $adresse;
+
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection | Groupe[]
+     * @ORM\ManyToMany(targetEntity="UA\UAplatformBundle\Entity\Groupe", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $groupes;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection | Message[]
+     * @ORM\OneToMany(targetEntity="UA\UAplatformBundle\Entity\Message", cascade={"persist"},mappedBy="Utilisateur")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $messages;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection | Suggestion[]
+     * @ORM\OneToMany(targetEntity="UA\UAplatformBundle\Entity\Suggestion", cascade={"persist"},mappedBy="Utilisateur")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $suggestions;
 
 
     /**
@@ -155,6 +180,109 @@ class Utilisateur extends BaseUser
     public function getAdresse()
     {
         return $this->adresse;
+    }
+
+    /**
+     * Add groupe
+     *
+     * @param Groupe $groupe
+     *
+     * @return Utilisateur
+     */
+    public function addGroupe(Groupe $groupe)
+    {
+        $this->groupes[] = $groupe;
+
+        return $this;
+    }
+
+    /**
+     * Remove groupe
+     *
+     * @param Groupe $groupe
+     */
+    public function removeGroupe(Groupe $groupe)
+    {
+        $this->groupes->removeElement($groupe);
+    }
+
+    /**
+     * Get groupes
+     *
+     * @return \Doctrine\Common\Collections\Collection | Groupe[]
+     */
+    public function getGroupes()
+    {
+        return $this->groupes;
+    }
+
+    /**
+     * Add message
+     *
+     * @param Message $message
+     *
+     * @return Utilisateur
+     */
+    public function addMessage(Message $message)
+    {
+        $this->messages[] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Remove message
+     *
+     * @param Message $message
+     */
+    public function removeMessage(Message $message)
+    {
+        $this->messages->removeElement($message);
+    }
+
+    /**
+     * Get messages
+     *
+     * @return \Doctrine\Common\Collections\Collection | Message[]
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+
+    /**
+     * Add suggestion
+     *
+     * @param Suggestion $suggestion
+     *
+     * @return Utilisateur
+     */
+    public function addSuggestion(Suggestion $suggestion)
+    {
+        $this->suggestions[] = $suggestion;
+
+        return $this;
+    }
+
+    /**
+     * Remove suggestion
+     *
+     * @param Suggestion $suggestion
+     */
+    public function removeSuggestion(Suggestion $suggestion)
+    {
+        $this->suggestions->removeElement($suggestion);
+    }
+
+    /**
+     * Get suggestions
+     *
+     * @return \Doctrine\Common\Collections\Collection | Suggestion[]
+     */
+    public function getSuggestions()
+    {
+        return $this->suggestions;
     }
 }
 
