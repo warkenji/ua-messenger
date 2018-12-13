@@ -1,6 +1,6 @@
 <?php
 
-namespace UA\UtilisateurBundle\Entity;
+namespace UA\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -63,14 +63,14 @@ class Utilisateur extends BaseUser
 
     /**
      * @var \Doctrine\Common\Collections\Collection | Message[]
-     * @ORM\OneToMany(targetEntity="UA\UAplatformBundle\Entity\Message", cascade={"persist"},mappedBy="Utilisateur")
+     * @ORM\OneToMany(targetEntity="UA\UAplatformBundle\Entity\Message", cascade={"persist"},mappedBy="utilisateur")
      * @ORM\JoinColumn(nullable=true)
      */
     private $messages;
 
     /**
      * @var \Doctrine\Common\Collections\Collection | Suggestion[]
-     * @ORM\OneToMany(targetEntity="UA\UAplatformBundle\Entity\Suggestion", cascade={"persist"},mappedBy="Utilisateur")
+     * @ORM\OneToMany(targetEntity="UA\UAplatformBundle\Entity\Suggestion", cascade={"persist"},mappedBy="utilisateur")
      * @ORM\JoinColumn(nullable=true)
      */
     private $suggestions;

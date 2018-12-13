@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Notes
  *
  * @ORM\Table(name="notes")
- * @ORM\Entity(repositoryClass="UA\UAplatformBundle\Repository\NoteRepository")
+ * @ORM\Entity(repositoryClass="UA\UAplatformBundle\Repository\NotesRepository")
  */
-class Note
+class Notes
 {
     /**
      * @var int
@@ -44,7 +44,7 @@ class Note
      *
      * @param integer $valeur
      *
-     * @return Note
+     * @return Notes
      */
     public function setValeur($valeur)
     {
