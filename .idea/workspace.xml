@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1568daec-f31b-4526-a4ec-eeb512bfb343" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UA/UAplatformBundle/Entity/Message.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Entity/Message.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UA/UAplatformBundle/Entity/Note.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Entity/Note.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UA/UAplatformBundle/Entity/Suggestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Entity/Suggestion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UA/UserBundle/Entity/Utilisateur.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/UA/UserBundle/Entity/Utilisateur.php" afterDir="false" />
-    </list>
+    <list default="true" id="1568daec-f31b-4526-a4ec-eeb512bfb343" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -372,6 +366,14 @@
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="UA" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="UAplatformBundle" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Driver" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ua-messenger" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="UA" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="UAplatformBundle" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Entity" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
@@ -432,7 +434,7 @@
       <option name="presentableId" value="Default" />
       <updated>1544615168857</updated>
       <workItem from="1544615172609" duration="23714000" />
-      <workItem from="1544711894743" duration="6225000" />
+      <workItem from="1544711894743" duration="6425000" />
     </task>
     <task id="LOCAL-00001" summary="modification Procfile">
       <created>1544620942936</created>
@@ -536,11 +538,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33976000" />
+    <option name="totallyTimeSpent" value="34176000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17040598" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
