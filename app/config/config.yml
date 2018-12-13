@@ -85,7 +85,7 @@ fos_user:
 
 gos_web_socket:
     server:
-        port: 8888        #The port the socket server will listen on
+        port: 8080        #The port the socket server will listen on
         host: 0.0.0.0   #The host ip to bind to
         router:
             resources:
