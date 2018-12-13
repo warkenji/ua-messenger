@@ -35,7 +35,7 @@ class UARoom implements TopicInterface
     {
         //this will broadcast the message to ALL subscribers of this topic.
         $utilisateur = $this->clientManipulator->getClient($connection);
-        $topic->broadcast(['data' => $utilisateur->getUsername() . " a rejoint le salon"]);
+        $topic->broadcast(['data' => $utilisateur . " a rejoint le salon"]);
     }
 
     /**
@@ -50,7 +50,7 @@ class UARoom implements TopicInterface
     {
         //this will broadcast the message to ALL subscribers of this topic.
         $utilisateur = $this->clientManipulator->getClient($connection);
-        $topic->broadcast(['data' => $utilisateur->getUsername() . " a quitté le salon "]);
+        $topic->broadcast(['data' => $utilisateur . " a quitté le salon "]);
     }
 
     /**
@@ -78,7 +78,7 @@ class UARoom implements TopicInterface
         $userId = [$connection->WAMP->sessionId];
 
         $topic->broadcast([
-            'data' => trim($utilisateur->getUsername()) . ": " . trim($data)
+            'data' => trim($utilisateur) . ": " . trim($data)
         ], $userId);
 
         $topic->broadcast([
