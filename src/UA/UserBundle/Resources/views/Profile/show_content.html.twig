@@ -27,7 +27,7 @@
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
-                        {{ 'user.nom' }} {{ 'user.prenom' }}
+                        {{ user.nom }} {{ user.prenom }}
                     </div>
                     <div class="profile-usertitle-job">
                         Master 2 - MIAGE
@@ -71,14 +71,14 @@
         <div class="col-md-9">
             <div class="profile-content">
                 <blockquote>
-                    <br><b>Nom :</b> {{ 'profile.show.nom' }} <br>
-                    <b>Prénom :</b> {{ 'profile.show.prenom' }}
-                    <small><cite title="Source Title">{{ 'profile.show.adresse' }}<i class="icon-map-marker"></i></cite></small>
+                    <br><b>Nom :</b> {{ user.nom }} <br>
+                    <b>Prénom :</b> {{ user.prenom }}
+                    <small><cite title="Source Title">{{ user.adresse }}<i class="icon-map-marker"></i></cite></small>
                 </blockquote>
                 <p>
                     <b>Numéro étudiant :</b> 59706923 <br>
-                    <b>Mél. :</b> {{ 'profile.show.adresse' }} <br>
-                    <b>Tél. :</b> {{ 'profile.show.tel' }} <br>
+                    <b>Mél. :</b> {{ user.adresse }} <br>
+                    <b>Tél. :</b> {{ user.tel }} <br>
                     <b>Date de naissance :</b> June 18, 597 AC <br><br>
 
                     <button type="button" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-plus"></i> Ajouter un CV</button>
