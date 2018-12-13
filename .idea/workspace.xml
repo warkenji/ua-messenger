@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1568daec-f31b-4526-a4ec-eeb512bfb343" name="Default Changelist" comment="login 4 censé fonctionner">
-      <change beforePath="$PROJECT_DIR$/.idea/ua-messenger.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ua-messenger.iml" afterDir="false" />
+    <list default="true" id="1568daec-f31b-4526-a4ec-eeb512bfb343" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UA/UAplatformBundle/Resources/views/Default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/UA/UAplatformBundle/Resources/views/Default/index.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -52,11 +51,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UA/UAplatformBundle/Resources/views/Default/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
+            <state relative-caret-position="153">
+              <caret line="9" column="73" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="73" />
             </state>
           </provider>
         </entry>
@@ -70,7 +69,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/config/config.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="232">
@@ -138,8 +137,8 @@
         <option value="$PROJECT_DIR$/src/UA/UAplatformBundle/Repository/NoteRepository.php" />
         <option value="$PROJECT_DIR$/src/UA/UserBundle/Resources/public/css/style.css" />
         <option value="$PROJECT_DIR$/src/UA/UserBundle/Resources/views/Security/login.html.twig" />
-        <option value="$PROJECT_DIR$/src/UA/UAplatformBundle/Resources/views/Default/index.html.twig" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/src/UA/UAplatformBundle/Resources/views/Default/index.html.twig" />
       </list>
     </option>
   </component>
@@ -525,11 +524,18 @@
       <option name="project" value="LOCAL" />
       <updated>1544730783658</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="login 5 censé fonctionner">
+      <created>1544731138671</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1544731138671</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34207000" />
+    <option name="totallyTimeSpent" value="34275000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -603,10 +609,10 @@
     <MESSAGE value="login 4 censé fonctionner" />
     <MESSAGE value="BOOOM work" />
     <MESSAGE value="it's working login" />
-    <MESSAGE value="login 5 censé fonctionner" />
     <MESSAGE value="voila commit" />
     <MESSAGE value="lool" />
-    <option name="LAST_COMMIT_MESSAGE" value="lool" />
+    <MESSAGE value="login 5 censé fonctionner" />
+    <option name="LAST_COMMIT_MESSAGE" value="login 5 censé fonctionner" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/config/config_prod.yml">
@@ -812,13 +818,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UA/UAplatformBundle/Resources/views/Default/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/UA/UAplatformBundle/Room/UARoom.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1621">
@@ -833,6 +832,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
           <caret line="87" column="16" lean-forward="true" selection-start-line="87" selection-start-column="16" selection-end-line="87" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UA/UAplatformBundle/Resources/views/Default/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="73" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="73" />
         </state>
       </provider>
     </entry>

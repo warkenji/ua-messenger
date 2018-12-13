@@ -7,7 +7,7 @@
 <script src="{{ asset('bundles/goswebsocket/js/gos_web_socket_client.js') }}"></script>
     <script>
         $(document).ready(() => {
-            const webSocket = WS.connect("ws://ua-messenger.herokuapp.com:8080");
+            const webSocket = WS.connect("ws://ua-messenger.herokuapp.com");
         const status = $("#status");
         const message = $("#message");
         const input = $("#input");
