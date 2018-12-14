@@ -6,7 +6,7 @@ body {
     background: #1f365a;
     font-family: "proxima-nova", "Source Sans Pro", sans-serif;
     font-size: 1em;
-    letter-spacing: 0.1px;
+    letter-spacing: 0;
     color: #32465a;
     text-rendering: optimizeLegibility;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
@@ -614,7 +614,7 @@ body {
     font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
     float: left;
     border: none;
-    width: calc(-90px + 90%);
+    width: calc(-90px + 100%);
     font-size: 0.8em;
     color: #32465a;
     padding: 15px 32px 10px 8px;
