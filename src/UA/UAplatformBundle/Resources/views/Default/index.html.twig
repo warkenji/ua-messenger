@@ -52,7 +52,7 @@
                         if(payload.id == null && payload.username != null) qui = "Visiteur";
                         if(payload.id != null && payload.username != null) qui = payload.username;
 
-                        if(payload.id !== {{ app.user.id }}){
+                        if({{ app.user }} !== null && payload.id !== {{ app.user.id }}){
                             $(
                                 '<li class="replies"> <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
                                 '<p>' +
@@ -248,6 +248,9 @@
                         </li>#}
                     </ul>
                 </div>
+                <br>
+                <br>
+                <br>
                 <div class="message-input">
                     <div class="wrap">
                         <input type="text" placeholder="Ecriver votre message..." />
