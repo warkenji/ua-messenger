@@ -55,7 +55,7 @@
                         if(payload.id !== {{ app.user.id }}){
                             $(
                                 '<li class="replies">' +
-                                    {{ app.user.id }} + " " + payload.id +
+                                    {#{{ app.user.id }} + " " + payload.id +#}
                                 ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
                                 '<p>' +
                                 '<span>' +
@@ -80,7 +80,7 @@
 
                     $(
                         '<li class="sent">' +
-                            {{ app.user.id }} +
+                            {#{{ app.user.id }} +#}
                         ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
                         '<p>' +
                         '<span>' +
