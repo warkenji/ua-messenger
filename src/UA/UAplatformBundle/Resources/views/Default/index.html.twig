@@ -14,7 +14,7 @@
 
         <script>
             $(document).ready(() => {
-                const webSocket = WS.connect("ws://0.0.0.0:8888");
+                const webSocket = WS.connect("ws://127.0.0.1:8888");
 
                 //const host = location.origin.replace(/^http/, 'ws');
                 //const webSocket = WS.connect(host);
@@ -54,9 +54,7 @@
 
                         if(payload.id !== {{ app.user.id }}){
                             $(
-                                '<li class="replies">' +
-                                    {{ app.user.id }} + " " + payload.id +
-                                ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
+                                '<li class="replies"> <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
                                 '<p>' +
                                 '<span>' +
                                 '<b style="font-weight: bold;">' + qui + '</b>' +
@@ -79,9 +77,7 @@
                     if($.trim(message) === '') return false;
 
                     $(
-                        '<li class="sent">' +
-                            {{ app.user.id }} +
-                        ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
+                        '<li class="sent"> <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
                         '<p>' +
                         '<span>' +
                         '<b style="font-weight: bold;">Vous</b>' +
