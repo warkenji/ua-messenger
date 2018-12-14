@@ -76,6 +76,8 @@ class Utilisateur extends BaseUser
     private $suggestions;
 
 
+
+
     /**
      * Get id
      *
@@ -196,33 +198,7 @@ class Utilisateur extends BaseUser
         return $this;
     }
 
-    /**
-     * Remove groupe
-     *
-     * @param Groupe $groupe
-     */
-    public function removeGroupe(Groupe $groupe)
-    {
-        $this->groupes->removeElement($groupe);
-    }
 
-    /**
-     * Get groupes
-     *
-     * @return \Doctrine\Common\Collections\Collection | Groupe[]
-     */
-    public function getGroupes()
-    {
-        return $this->groupes;
-    }
-
-    /**
-     * Add message
-     *
-     * @param Message $message
-     *
-     * @return Utilisateur
-     */
     public function addMessage(Message $message)
     {
         $this->messages[] = $message;
@@ -284,5 +260,50 @@ class Utilisateur extends BaseUser
     {
         return $this->suggestions;
     }
-}
 
+    /**
+     * Set groupe.
+     *
+     * @param \UA\UAplatformBundle\Entity\Groupe $groupe
+     *
+     * @return Utilisateur
+     */
+    public function setGroupe(\UA\UAplatformBundle\Entity\Groupe $groupe)
+    {
+        $this->groupe = $groupe;
+
+        return $this;
+    }
+
+    /**
+     * Get groupe.
+     *
+     * @return \UA\UAplatformBundle\Entity\Groupe
+     */
+    public function getGroupe()
+    {
+        return $this->groupe;
+    }
+
+    /**
+     * Remove groupe.
+     *
+     * @param \UA\UAplatformBundle\Entity\Groupe $groupe
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeGroupe(\UA\UAplatformBundle\Entity\Groupe $groupe)
+    {
+        return $this->groupes->removeElement($groupe);
+    }
+
+    /**
+     * Get groupes.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroupes()
+    {
+        return $this->groupes;
+    }
+}
