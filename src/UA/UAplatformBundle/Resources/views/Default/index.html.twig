@@ -48,13 +48,14 @@
                     session.subscribe("ua/channel", function (uri, payload) {
 
                         let qui;
-                        if(payload.id == null && payload.username == null) qui = "Système";
-                        if(payload.id == null && payload.username != null) qui = "Visiteur";
-                        if(payload.id != null && payload.username != null) qui = payload.username;
+                        if(payload.username == null) qui = "Système";
+                        if(payload.username != null) qui = payload.username;
 
                         {% if app.user != null %}
 
-                        if(payload.id === {{ app.user.id }}){
+                        console.log(payload);
+
+                        if(payload.you){
                             $(
                                 '<li class="sent">' +
                                     {#{{ app.user.id }} +#}
@@ -270,6 +271,7 @@
                             </p>
                         </li>#}
                     </ul>
+                    <br><br><br>
                 </div>
                 <div class="message-input">
                     <div class="wrap">
