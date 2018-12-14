@@ -47,25 +47,27 @@
                     //the callback function in "subscribe" is called everytime an event is published in that channel.
                     session.subscribe("ua/channel", function (uri, payload) {
 
-                        let qui = "Système";
-
+                        let qui;
+                        if(payload.id == null && payload.username == null) qui = "Système";
                         if(payload.id == null && payload.username != null) qui = "Visiteur";
                         if(payload.id != null && payload.username != null) qui = payload.username;
 
-                        $(
-                            '<li class="replies">' +
-                            '<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
-                            '<p>' +
-                            '<span>' +
-                            '<b style="font-weight: bold;">' + qui + '</b>' +
-                            '<time>' + d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate() + '</time>' +
-                            '</span>' +
-                            '<br><br>' +
-                            '<span>' +
-                            payload.data +
-                            '</span>' +
-                            '</p>' +
-                            '</li>').appendTo($('.messages ul'));
+                        if(payload.id !== {{ app.user.id }}){
+                            $(
+                                '<li class="replies">' +
+                                '<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
+                                '<p>' +
+                                '<span>' +
+                                '<b style="font-weight: bold;">' + qui + '</b>' +
+                                '<time> ' + d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate() + '</time>' +
+                                '</span>' +
+                                '<br><br>' +
+                                '<span>' +
+                                payload.data +
+                                '</span>' +
+                                '</p>' +
+                                '</li>').appendTo($('.messages ul'));
+                        }
                     });
                 });
 
@@ -81,7 +83,7 @@
                         '<p>' +
                         '<span>' +
                         '<b style="font-weight: bold;">Vous</b>' +
-                        '<time>' + d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate() + '</time>' +
+                        '<time> ' + d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate() + '</time>' +
                         '</span>' +
                         '<br><br>' +
                         '<span>' +
@@ -104,7 +106,7 @@
                 <div id="profile">
                     <div class="wrap">
                         <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
-                        <p>Jébédia Kodakay {{  app.user ? app.user.username : 'Vous' }}
+                        <p>{{  app.user ? app.user.username : 'Vous' }}
                         </p>
                         <i class="fa fa-home" style="float: right; margin-top: 8%;" aria-hidden="true"></i>
                         <div id="status-options">
