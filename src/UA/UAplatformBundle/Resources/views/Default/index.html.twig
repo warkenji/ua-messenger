@@ -52,9 +52,27 @@
                         if(payload.id == null && payload.username != null) qui = "Visiteur";
                         if(payload.id != null && payload.username != null) qui = payload.username;
 
-                        if({{ app.user }} !== null && payload.id !== {{ app.user.id }}){
+                        if(payload.id === {{ app.user.id }}){
                             $(
-                                '<li class="replies"> <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
+                                '<li class="sent">' +
+                                    {#{{ app.user.id }} +#}
+                                ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
+                                '<p>' +
+                                '<span>' +
+                                '<b style="font-weight: bold;">Vous</b>' +
+                                '<time> ' + d.getDate()+'/'+(d.getMonth()+1)+'/'+ d.getFullYear()+ '</time>' +
+                                '</span>' +
+                                '<br><br>' +
+                                '<span>' +
+                                payload.data +
+                                '</span>' +
+                                '</p>' +
+                                '</li>').appendTo($('.messages ul'));
+                        } else {
+                            $(
+                                '<li class="replies">' +
+                                    {#{{ app.user.id }} + " " + payload.id +#}
+                                ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
                                 '<p>' +
                                 '<span>' +
                                 '<b style="font-weight: bold;">' + qui + '</b>' +
@@ -76,8 +94,9 @@
                     const message = select_message.val();
                     if($.trim(message) === '') return false;
 
-                    $(
-                        '<li class="sent"> <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
+                     /*$(
+                        '<li class="sent">' +
+                        ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
                         '<p>' +
                         '<span>' +
                         '<b style="font-weight: bold;">Vous</b>' +
@@ -88,7 +107,7 @@
                         message +
                         '</span>' +
                         '</p>' +
-                        '</li>').appendTo($('.messages ul'));
+                        '</li>').appendTo($('.messages ul'));*/
 
                     session.publish("ua/channel", message);
                     select_message.val(null);
@@ -248,9 +267,6 @@
                         </li>#}
                     </ul>
                 </div>
-                <br>
-                <br>
-                <br>
                 <div class="message-input">
                     <div class="wrap">
                         <input type="text" placeholder="Ecriver votre message..." />
