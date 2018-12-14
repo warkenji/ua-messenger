@@ -14,7 +14,7 @@
 
         <script>
             $(document).ready(() => {
-                const webSocket = WS.connect("ws://ua-messenger.herokuapp.com:" + window.location.port);
+                const webSocket = WS.connect("ws://ua-messenger.herokuapp.com:" + location.port);
 
                 /*const HOST = location.origin.replace(/^http/, 'ws');
                 const webSocket = WS.connect(HOST);*/
