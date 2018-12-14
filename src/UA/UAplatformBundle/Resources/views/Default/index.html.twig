@@ -52,14 +52,14 @@
                         if(payload.id == null && payload.username != null) qui = "Visiteur";
                         if(payload.id != null && payload.username != null) qui = payload.username;
 
-                        if(payload.id !== {{ app.user.id }}){
+                        if(qui === {{ app.user.id }}){
                             $(
-                                '<li class="replies">' +
-                                    {#{{ app.user.id }} + " " + payload.id +#}
+                                '<li class="sent">' +
+                                    {#{{ app.user.id }} +#}
                                 ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
                                 '<p>' +
                                 '<span>' +
-                                '<b style="font-weight: bold;">' + qui + '</b>' +
+                                '<b style="font-weight: bold;">Vous</b>' +
                                 '<time> ' + d.getDate()+'/'+(d.getMonth()+1)+'/'+ d.getFullYear()+ '</time>' +
                                 '</span>' +
                                 '<br><br>' +
@@ -68,6 +68,24 @@
                                 '</span>' +
                                 '</p>' +
                                 '</li>').appendTo($('.messages ul'));
+                        } else {
+                            if(payload.id !== {{ app.user.id }}){
+                                $(
+                                    '<li class="replies">' +
+                                        {#{{ app.user.id }} + " " + payload.id +#}
+                                    ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
+                                    '<p>' +
+                                    '<span>' +
+                                    '<b style="font-weight: bold;">' + qui + '</b>' +
+                                    '<time> ' + d.getDate()+'/'+(d.getMonth()+1)+'/'+ d.getFullYear()+ '</time>' +
+                                    '</span>' +
+                                    '<br><br>' +
+                                    '<span>' +
+                                    payload.data +
+                                    '</span>' +
+                                    '</p>' +
+                                    '</li>').appendTo($('.messages ul'));
+                            }
                         }
                     });
                 });
@@ -78,7 +96,7 @@
                     const message = select_message.val();
                     if($.trim(message) === '') return false;
 
-                    $(
+                     /*$(
                         '<li class="sent">' +
                             {#{{ app.user.id }} +#}
                         ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
@@ -92,7 +110,7 @@
                         message +
                         '</span>' +
                         '</p>' +
-                        '</li>').appendTo($('.messages ul'));
+                        '</li>').appendTo($('.messages ul'));*/
 
                     session.publish("ua/channel", message);
                     select_message.val(null);
