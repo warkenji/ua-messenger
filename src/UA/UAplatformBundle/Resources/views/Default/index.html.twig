@@ -14,7 +14,7 @@
 
         <script>
             $(document).ready(() => {
-                const webSocket = WS.connect("ws://0.0.0.0:8888");
+                const webSocket = WS.connect("ws://127.0.0.1:8888");
 
                 //const host = location.origin.replace(/^http/, 'ws');
                 //const webSocket = WS.connect(host);
@@ -98,7 +98,6 @@
 
                      /*$(
                         '<li class="sent">' +
-                            {#{{ app.user.id }} +#}
                         ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
                         '<p>' +
                         '<span>' +
