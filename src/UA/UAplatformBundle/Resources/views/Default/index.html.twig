@@ -1,4 +1,4 @@
-<!DOCTYPE>
+<!doctype html>
 <html LANG="fr">
     <head>
         <meta charset="UTF-8">
@@ -14,10 +14,10 @@
 
         <script>
             $(document).ready(() => {
-                //const webSocket = WS.connect("ws://ua-messenger.herokuapp.com");
+                const webSocket = WS.connect("wss://ua-messenger.herokuapp.com/");
 
-                const HOST = location.origin.replace(/^http/, 'ws');
-                const webSocket = WS.connect(HOST);
+                /*const HOST = location.origin.replace(/^http/, 'ws');
+                const webSocket = WS.connect(HOST);*/
                 const status = $("#status");
                 //const message = $("#message");
                 //const input = $("#input");
