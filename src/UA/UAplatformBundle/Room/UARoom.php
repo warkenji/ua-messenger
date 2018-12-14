@@ -63,7 +63,7 @@ class UARoom implements TopicInterface
 
 
         $topic->broadcast([
-            'id' => null,
+            'you' => false,
             'username' => null,
             'data' => $username . " a rejoint le salon"
         ]);
@@ -91,7 +91,7 @@ class UARoom implements TopicInterface
 
 
         $topic->broadcast([
-            'id' => null,
+            'you' => false,
             'username' => null,
             'data' => $username . " a quitté le salon"
         ]);
@@ -116,20 +116,25 @@ class UARoom implements TopicInterface
         if($utilisateur)
         {
             $username = $utilisateur->getUsername();
-            $id = $utilisateur->getId();
         }
         else
         {
             $username = "Visiteur_" . $connection->resourceId;
-            $id = null;
         }
 
         if(!empty($rawData)) {
-            $topic->broadcast([
-                'id' => $id,
+            $id = [$connection->WAMP->sessionId];
+            $obj = [
+                'you' => false,
                 'username' =>$username,
                 'data' => $data
-            ]);
+            ];
+
+            $topic->broadcast($obj, $id);
+
+            $obj['you'] = true;
+
+            $topic->broadcast($obj, [], $id);
         }
     }
 
