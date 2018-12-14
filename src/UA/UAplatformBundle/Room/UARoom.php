@@ -113,7 +113,7 @@ class UARoom implements TopicInterface
         $utilisateur = $this->getUtilisateur($connection);
         $data = trim($rawData);
 
-        if($utilisateur == null)
+        if($utilisateur)
         {
             $username = $utilisateur->getUsername();
             $id = $utilisateur->getId();
