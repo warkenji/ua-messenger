@@ -25,11 +25,7 @@
 
 <body class="text-center">
 
-{% if error %}
 
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-
-{% endif %}
 
 <div class="form-signin">
     <img alt="" class="mb-4 logo" src="{{ asset('bundles/user/img/logo.png') }}">
@@ -37,6 +33,11 @@
     <h1 class="h3 mb-3 font-weight-normal">Veuillez-vous enregister</h1>
 
 
+        {% if error %}
+            <div class="alert alert-danger">
+                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            </div>
+        {% endif %}
 
     <form action="{{ path('fos_user_security_check') }}" class="form-inline" method="post">
         {% if csrf_token %}
@@ -70,7 +71,7 @@
         <hr>
         <div class="checkbox mb-3">
             <label for="remember_me">
-                <input type="checkbox" id="remember_me" name="_remember_me" value="on" checked data-toggle="toggle"> Se souvenir de moi
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" checked data-toggle="toggle" data-off="Non" data-on="Oui" data-onstyle="warning"> Se souvenir de moi
             </label>
         </div>
 
@@ -78,7 +79,7 @@
     </form>
 
     <p class="mt-5 mb-3 text-muted" style="color: #111755 !important; text-align: center;">
-        &copy 2018
+        &copy; 2018
     </p>
 </div>
 </body>
