@@ -2,11 +2,14 @@
 
 namespace UA\UAplatformBundle\Room;
 
+use Doctrine\ORM\EntityManager;
 use Gos\Bundle\WebSocketBundle\Topic\TopicInterface;
 use Gos\Bundle\WebSocketBundle\Client\ClientManipulatorInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\Wamp\Topic;
 use Gos\Bundle\WebSocketBundle\Router\WampRequest;
+use UA\UserBundle\Entity\Utilisateur;
+use UA\UserBundle\Repository\UtilisateurRepository;
 
 class UARoom implements TopicInterface
 {
@@ -14,13 +17,28 @@ class UARoom implements TopicInterface
      * @var ClientManipulatorInterface
      */
     protected $clientManipulator;
+    protected $entityManager;
 
     /**
      * @param ClientManipulatorInterface $clientManipulator
+     * @param EntityManager $entityManager
      */
-    public function __construct(ClientManipulatorInterface $clientManipulator)
+    public function __construct(ClientManipulatorInterface $clientManipulator, EntityManager $entityManager)
     {
         $this->clientManipulator = $clientManipulator;
+        $this->entityManager = $entityManager;
+    }
+
+    private function getUtilisateur(ConnectionInterface $connection)
+    {
+        $client = $this->clientManipulator->getClient($connection);
+
+        if($client instanceof Utilisateur) {
+            $repository = $this->entityManager->getRepository('UserBundle:Utilisateur');
+            return $repository->find($client->getId());
+        }
+
+        return null;
     }
 
     /**
@@ -33,9 +51,22 @@ class UARoom implements TopicInterface
      */
     public function onSubscribe(ConnectionInterface $connection, Topic $topic, WampRequest $request)
     {
-        //this will broadcast the message to ALL subscribers of this topic.
-        $utilisateur = $this->clientManipulator->getClient($connection);
-        $topic->broadcast(['data' => $utilisateur . " a rejoint le salon"]);
+        $utilisateur = $this->getUtilisateur($connection);
+
+        if($utilisateur) {
+            $username = $utilisateur->getUsername();
+        }
+        else
+        {
+            $username = "Visiteur_" . $connection->resourceId;
+        }
+
+
+        $topic->broadcast([
+            'id' => null,
+            'username' => null,
+            'data' => $username . " a rejoint le salon"
+        ]);
     }
 
     /**
@@ -48,9 +79,22 @@ class UARoom implements TopicInterface
      */
     public function onUnSubscribe(ConnectionInterface $connection, Topic $topic, WampRequest $request)
     {
-        //this will broadcast the message to ALL subscribers of this topic.
-        $utilisateur = $this->clientManipulator->getClient($connection);
-        $topic->broadcast(['data' => $utilisateur . " a quitté le salon "]);
+        $utilisateur = $this->getUtilisateur($connection);
+
+        if($utilisateur) {
+            $username = $utilisateur->getUsername();
+        }
+        else
+        {
+            $username = "Visiteur_" . $connection->resourceId;
+        }
+
+
+        $topic->broadcast([
+            'id' => null,
+            'username' => null,
+            'data' => $username . " a quitté le salon"
+        ]);
     }
 
     /**
@@ -64,26 +108,29 @@ class UARoom implements TopicInterface
      * @param array $eligibles
      * @return mixed|void
      */
-    public function onPublish(ConnectionInterface $connection, Topic $topic, WampRequest $request, $data, array $exclude, array $eligibles)
+    public function onPublish(ConnectionInterface $connection, Topic $topic, WampRequest $request, $rawData, array $exclude, array $eligibles)
     {
-        /*
-            $topic->getId() will contain the FULL requested uri, so you can proceed based on that
+        $utilisateur = $this->getUtilisateur($connection);
+        $data = trim($rawData);
 
-            if ($topic->getId() == "acme/channel/shout")
-               //shout something to all subs.
-        */
+        if($utilisateur == null)
+        {
+            $username = $utilisateur->getUsername();
+            $id = $utilisateur->getId();
+        }
+        else
+        {
+            $username = "Visiteur_" . $connection->resourceId;
+            $id = null;
+        }
 
-
-        $utilisateur = $this->clientManipulator->getClient($connection);
-        $userId = [$connection->WAMP->sessionId];
-
-        $topic->broadcast([
-            'data' => trim($utilisateur) . ": " . trim($data)
-        ], $userId);
-
-        $topic->broadcast([
-            'data' => "vous: " . trim($data)
-        ], [], $userId);
+        if(!empty($rawData)) {
+            $topic->broadcast([
+                'id' => $id,
+                'username' =>$username,
+                'data' => $data
+            ]);
+        }
     }
 
     /**
