@@ -1,4 +1,4 @@
-<!DOCTYPE>
+<!doctype html>
 <html LANG="fr">
     <head>
         <meta charset="UTF-8">
@@ -14,7 +14,10 @@
 
         <script>
             $(document).ready(() => {
-                const webSocket = WS.connect("ws://ua-messenger.herokuapp.com:81");
+                //const webSocket = WS.connect("ws://ua-messenger.herokuapp.com:" + $(location).attr('port'));
+
+                const host = location.origin.replace(/^http/, 'ws');
+                const webSocket = WS.connect(host);
                 const status = $("#status");
                 //const message = $("#message");
                 //const input = $("#input");
@@ -48,6 +51,17 @@
                     //the callback function in "subscribe" is called everytime an event is published in that channel.
                     session.subscribe("ua/channel", function (uri, payload) {
                         //message.append("<p>" + payload.data + "</p>");
+                        {{ payload.data|replace({'<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' : ''}) }}
+                        {{ payload.data|replace({ '</p></li>' : ''}) }}
+
+                        if (payload.id == null && payload.username != null ){
+
+                        } else if(){
+
+                        } else{
+
+                        }
+
                         $('<li class="replies"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>'
                             + payload.data
                             + '</p></li>').appendTo($('.messages ul'));
@@ -60,9 +74,30 @@
                     const message = select_message.val();
                     if($.trim(message) === '') return false;
 
-                    //$('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+                /*<li class="sent">
+                        <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                        <p>
+                        <span>
+                        <b style="font-weight: bold;">Jébédia</b>
+                        <time datetime="2018-12-11">11/12/2018</time>
+                        </span>
+                        <br><br>
+                        <span>
+                        Hé ! J'ai vu un M2 sortir en sueur de la salle 202 xD !
+                    </span>
+                    </p>
+                    </li>*/
 
-                    session.publish("ua/channel", message);
+
+
+                    const le_vrai_message = $('<li class="sent">' +
+                        '<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
+                        '<p>' +
+                        '<span> <b style="font-weight: bold;">Vous</b><time>' + 11/12/2018 + '</time></span>' +
+                        message + '</p>' +
+                        '</li>').appendTo($('.messages ul'));
+
+                    session.publish("ua/channel", le_vrai_message);
                     select_message.val(null);
                     $(".messages").animate({ scrollTop: $(document).height() }, "fast");
                 }
