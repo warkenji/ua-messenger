@@ -21,6 +21,7 @@
                 const status = $("#status");
                 //const message = $("#message");
                 //const input = $("#input");
+                const d = new Date();
 
                 status.html("Status: En attente");
 
@@ -43,19 +44,28 @@
                         }
                     });
 
-                    /*input.find("button").on("click", () => {
-                        session.publish("ua/channel", input.find("input").val());
-                        input.find("input").val("");
-                    });*/
-
                     //the callback function in "subscribe" is called everytime an event is published in that channel.
                     session.subscribe("ua/channel", function (uri, payload) {
-                        //message.append("<p>" + payload.data + "</p>");
-                        {{ payload.data|replace({'<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' : ''}) }}
-                        {{ payload.data|replace({ '</p></li>' : ''}) }}
-                        $('<li class="replies"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>'
-                            + payload.data
-                            + '</p></li>').appendTo($('.messages ul'));
+
+                        let qui = "Système";
+
+                        if(payload.id == null && payload.username != null) qui = "Visiteur";
+                        if(payload.id != null && payload.username != null) qui = payload.username;
+
+                        $(
+                            '<li class="replies">' +
+                            '<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
+                            '<p>' +
+                            '<span>' +
+                            '<b style="font-weight: bold;">' + qui + '</b>' +
+                            '<time>' + d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate() + '</time>' +
+                            '</span>' +
+                            '<br><br>' +
+                            '<span>' +
+                            payload.data +
+                            '</span>' +
+                            '</p>' +
+                            '</li>').appendTo($('.messages ul'));
                     });
                 });
 
@@ -65,10 +75,22 @@
                     const message = select_message.val();
                     if($.trim(message) === '') return false;
 
-                    const le_vrai_message = $('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>'
-                        + message + '</p></li>').appendTo($('.messages ul'));
+                    $(
+                        '<li class="sent">' +
+                        '<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
+                        '<p>' +
+                        '<span>' +
+                        '<b style="font-weight: bold;">Vous</b>' +
+                        '<time>' + d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate() + '</time>' +
+                        '</span>' +
+                        '<br><br>' +
+                        '<span>' +
+                        message +
+                        '</span>' +
+                        '</p>' +
+                        '</li>').appendTo($('.messages ul'));
 
-                    session.publish("ua/channel", le_vrai_message);
+                    session.publish("ua/channel", message);
                     select_message.val(null);
                     $(".messages").animate({ scrollTop: $(document).height() }, "fast");
                 }
@@ -82,7 +104,8 @@
                 <div id="profile">
                     <div class="wrap">
                         <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
-                        <p>Jébédia Kodakay</p>
+                        <p>Jébédia Kodakay {{  app.user ? app.user.username : 'Vous' }}
+                        </p>
                         <i class="fa fa-home" style="float: right; margin-top: 8%;" aria-hidden="true"></i>
                         <div id="status-options">
                             <ul>
