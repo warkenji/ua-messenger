@@ -59,7 +59,10 @@
                                 '<p>' +
                                 '<span>' +
                                 '<b style="font-weight: bold;">Vous</b>' +
-                                '<time> ' + d.getDate()+'/'+(d.getMonth()+1)+'/'+ d.getFullYear()+ '</time>' +
+                                '<time> ' +
+                                d.getDate()+'/'+(d.getMonth()+1)+'/'+ d.getFullYear()+ ' ' + d.getHours() + ':'
+                                + d.getMinutes() +
+                                '</time>' +
                                 '</span>' +
                                 '<br><br>' +
                                 '<span>' +
@@ -75,7 +78,10 @@
                                 '<p>' +
                                 '<span>' +
                                 '<b style="font-weight: bold;">' + qui + '</b>' +
-                                '<time> ' + d.getDate()+'/'+(d.getMonth()+1)+'/'+ d.getFullYear()+ '</time>' +
+                                '<time> ' +
+                                d.getDate()+'/'+(d.getMonth()+1)+'/'+ d.getFullYear()+ ' ' + d.getHours() + ':'
+                                + d.getMinutes() +
+                                '</time>' +
                                 '</span>' +
                                 '<br><br>' +
                                 '<span>' +
@@ -84,6 +90,8 @@
                                 '</p>' +
                                 '</li>').appendTo($('.messages ul'));
                         }
+
+                        $(".messages").animate({ scrollTop: $(document).height() }, "fast");
                     });
                 });
 
@@ -121,10 +129,15 @@
             <div id="sidepanel">
                 <div id="profile">
                     <div class="wrap">
-                        <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
-                        <p>{{  app.user ? app.user.username : 'Vous' }}
+                        <p>
+                            <a href="{{ path('fos_user_profile') }}">
+                                {{  app.user ? app.user.username : 'Vous' }}
+                            </a>
                         </p>
-                        <i class="fa fa-home" style="float: right; margin-top: 8%;" aria-hidden="true"></i>
+                        <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+                        <a href="{{ path('u_aplatform_homepage') }}" >
+                            <i class="fa fa-home" style="float: right; margin-top: 8%;" aria-hidden="true"></i>
+                        </a>
                         <div id="status-options">
                             <ul>
                                 <li id="status-online" class="active"><span class="status-circle"></span> <p>En ligne</p></li>
