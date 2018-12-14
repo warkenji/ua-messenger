@@ -93,4 +93,28 @@ class Suggestion
     {
         return $this->user;
     }
+
+    /**
+     * Set user.
+     *
+     * @param \UA\UserBundle\Entity\Utilisateur $user
+     *
+     * @return Suggestion
+     */
+    public function setUser(\UA\UserBundle\Entity\Utilisateur $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user.
+     *
+     * @return \UA\UserBundle\Entity\Utilisateur
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

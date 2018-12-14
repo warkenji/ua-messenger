@@ -1,48 +1,275 @@
 <!DOCTYPE>
 <html LANG="fr">
-<head>
-    <title>UA Messenger</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="{{ asset('bundles/goswebsocket/js/vendor/autobahn.min.js') }}"></script>
-<script src="{{ asset('bundles/goswebsocket/js/gos_web_socket_client.js') }}"></script>
-    <script>
-        $(document).ready(() => {
-            const webSocket = WS.connect("ws://ua-messenger.herokuapp.com:8888");
-        const status = $("#status");
-        const message = $("#message");
-        const input = $("#input");
+    <head>
+        <meta charset="UTF-8">
+        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+        <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+        <link rel="stylesheet" href="{{ asset('bundles/user/css/chat-css.css') }}">
 
-        status.html("Status: En attente");
+        <title>UA Messenger</title>
 
-        webSocket.on("socket/connect", function (session) {
-            status.text("Successfully Connected!");
-        });
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{ asset('bundles/goswebsocket/js/vendor/autobahn.min.js') }}"></script>
+        <script src="{{ asset('bundles/goswebsocket/js/gos_web_socket_client.js') }}"></script>
 
-        webSocket.on("socket/disconnect", function (error) {
-            status.text("Disconnected for " + error.reason + " with code " + error.code);
-        });
+        <script>
+            $(document).ready(() => {
+                const webSocket = WS.connect("ws://ua-messenger.herokuapp.com:81");
+                const status = $("#status");
+                //const message = $("#message");
+                //const input = $("#input");
 
-        webSocket.on("socket/connect", function (session) {
+                status.html("Status: En attente");
 
-            input.find("button").on("click", () => {
-                session.publish("ua/channel", input.find("input").val());
-                input.find("input").val("");
+                webSocket.on("socket/connect", function () {
+                    status.text("Successfully Connected!");
+                });
+
+                webSocket.on("socket/disconnect", function (error) {
+                    status.text("Disconnected for " + error.reason + " with code " + error.code);
+                });
+
+                webSocket.on("socket/connect", function (session) {
+
+                    $('.submit').click(function() { newMessage(session); });
+
+                    $(window).on('keydown', function(e) {
+                        if (e.which === 13) {
+                            newMessage(session);
+                            return false;
+                        }
+                    });
+
+                    /*input.find("button").on("click", () => {
+                        session.publish("ua/channel", input.find("input").val());
+                        input.find("input").val("");
+                    });*/
+
+                    //the callback function in "subscribe" is called everytime an event is published in that channel.
+                    session.subscribe("ua/channel", function (uri, payload) {
+                        //message.append("<p>" + payload.data + "</p>");
+                        $('<li class="replies"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>'
+                            + payload.data
+                            + '</p></li>').appendTo($('.messages ul'));
+                    });
+                });
+
+
+                function newMessage(session) {
+                    const select_message = $(".message-input input");
+                    const message = select_message.val();
+                    if($.trim(message) === '') return false;
+
+                    //$('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+
+                    session.publish("ua/channel", message);
+                    select_message.val(null);
+                    $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+                }
+            });
+        </script>
+    </head>
+
+    <body>
+        <div id="frame">
+            <div id="sidepanel">
+                <div id="profile">
+                    <div class="wrap">
+                        <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+                        <p>Jébédia Kodakay</p>
+                        <i class="fa fa-home" style="float: right; margin-top: 8%;" aria-hidden="true"></i>
+                        <div id="status-options">
+                            <ul>
+                                <li id="status-online" class="active"><span class="status-circle"></span> <p>En ligne</p></li>
+                                <li id="status-away"><span class="status-circle"></span> <p>Loin</p></li>
+                                <li id="status-busy"><span class="status-circle"></span> <p>Occupé</p></li>
+                                <li id="status-offline"><span class="status-circle"></span> <p>Hors ligne</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="search">
+                    <label><i class="fa fa-search" aria-hidden="true"></i></label>
+                    <input type="text" placeholder="Chercher un groupe..." />
+                </div>
+                <div id="contacts">
+                    <ul>
+                        <li class="contact">
+                            <div class="wrap">
+                                <span class="contact-status online" style="margin-top: 1.5%;"></span>
+                                <div class="meta">
+                                    <p class="name"  style="margin-left: 18%;">Général&nbsp;&nbsp;><i class="fa fa-unlock"  style="float: right;" aria-hidden="true"></i></p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="contact">
+                            <div class="wrap">
+                                <span class="contact-status online" style="margin-top: 1.5%;"></span>
+                                <div class="meta">
+                                    <p class="name"  style="margin-left: 18%;">Filière&nbsp;&nbsp;><i class="fa fa-lock"  style="float: right;" aria-hidden="true"></i></p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="contact">
+                            <div class="wrap">
+                                <span class="contact-status online" style="margin-top: 1.5%;"></span>
+                                <div class="meta">
+                                    <p class="name"  style="margin-left: 18%;">Théâtre&nbsp;&nbsp;><i class="fa fa-unlock"  style="float: right;" aria-hidden="true"></i></p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="contact active">
+                            <div class="wrap">
+                                <span class="contact-status busy" style="margin-top: 1.5%;"></span>
+                                <div class="meta">
+                                    <p class="name"  style="margin-left: 18%;">Caste supérieur (MIAGE)&nbsp;&nbsp;><i class="fa fa-lock"  style="float: right;" aria-hidden="true"></i></p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="contact">
+                            <div class="wrap">
+                                <span class="contact-status away" style="margin-top: 1.5%;"></span>
+                                <div class="meta">
+                                    <p class="name"  style="margin-left: 18%;">Master Informatique&nbsp;&nbsp;><i class="fa fa-lock"  style="float: right;" aria-hidden="true"></i></p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="bottom-bar">
+                    <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Ajouter un groupe</span></button>
+                    <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Paramètres</span></button>
+                </div>
+            </div>
+            <div class="content">
+                <div style="text-align: center" class="contact-profile">
+                    <p style="font-weight: bolder; text-align: center; width: 100%;"># Caste supérieur (MIAGE)</p>
+                </div>
+                <br>
+                <div class="messages">
+                    <p id="status">Status:</p>
+                    <ul>
+                        {#<li class="sent">
+                            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+                            <p>
+                                <span>
+                                    <b style="font-weight: bold;">Jébédia</b>
+                                    <time datetime="2018-12-11">11/12/2018</time>
+                                </span>
+                                <br><br>
+                                <span>
+                                    Hé ! J'ai vu un M2 sortir en sueur de la salle 202 xD !
+                                </span>
+                            </p>
+                        </li>
+                        <li class="replies">
+                            <img src="{{ asset('bundles/user/img/julien.jpg') }}" alt="" />
+                            <p>
+                                <span>
+                                    <b style="font-weight: bold;">Ezekiel</b>
+                                    <time datetime="2018-12-11">11/12/2018</time>
+                                </span>
+                                <br><br>
+                                <span>
+                                    C'est tellement des sous-hommes ces M2 !
+                                </span>
+                            </p>
+                        </li>
+                        <li class="replies">
+                            <img src="{{ asset('bundles/user/img/julien.jpg') }}" alt="" />
+                            <p>
+                                <span>
+                                    <b style="font-weight: bold;">Ezekiel</b>
+                                    <time datetime="2018-12-11">11/12/2018</time>
+                                </span>
+                                <br><br>
+                                <span>😂😂🤣🤣🤣</span>
+                            </p>
+                        </li>
+                        <li class="sent">
+                            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+
+                            <p>
+                                <span>
+                                    <b style="font-weight: bold;">Jébédia</b>
+                                    <time datetime="2018-12-11">11/12/2018</time>
+                                </span>
+                                <br><br>
+                                <span>
+                                    Ouais, et ils ont un même un belge 🍟.
+                                </span>
+                            </p>
+                        </li>
+                        <li class="replies">
+                            <img src="{{ asset('bundles/user/img/julien.jpg') }}" alt="" />
+                            <p>
+                                <span>
+                                    <b style="font-weight: bold;">Ezekiel</b>
+                                    <time datetime="2018-12-11">11/12/2018</time>
+                                </span>
+                                <br><br>
+                                <span>
+                                    Aucune dignité franchement !
+                                </span>
+                            </p>
+                        </li>#}
+                    </ul>
+                </div>
+                <div class="message-input">
+                    <div class="wrap">
+                        <input type="text" placeholder="Ecriver votre message..." />
+                        <button class="submit"><i class="fa fa-bullhorn" aria-hidden="true"></i></button>
+                        <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+                        <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script >
+            $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
+            $("#profile-img").click(function() {
+                $("#status-options").toggleClass("active");
             });
 
-            //the callback function in "subscribe" is called everytime an event is published in that channel.
-            session.subscribe("ua/channel", function (uri, payload) {
-                message.append("<p>" + payload.data + "</p>");
+            $(".expand-button").click(function() {
+                $("#profile").toggleClass("expanded");
+                $("#contacts").toggleClass("expanded");
             });
-        });
-    });
-    </script>
-</head>
-<body>
-<div id="status">Status:</div>
-<div id="message"></div>
-<div id="input">
-    <input type="text">
-    <button>Envoyer</button>
-</div>
-</body>
+
+            $("#status-options ul li").click(function() {
+                let status_online = $("#status-online");
+                let status_away = $("#status-away");
+                let profile_image = $("#profile-img");
+                let status_offline = $("#status-offline");
+                let status_busy = $("#status-busy");
+
+                profile_image.removeClass();
+                status_online.removeClass("active");
+                status_away.removeClass("active");
+                status_busy.removeClass("active");
+                status_offline.removeClass("active");
+                $(this).addClass("active");
+
+                if(status_online.hasClass("active")) {
+                    profile_image.addClass("online");
+                } else if (status_away.hasClass("active")) {
+                    profile_image.addClass("away");
+                } else if (status_busy.hasClass("active")) {
+                    profile_image.addClass("busy");
+                } else if (status_offline.hasClass("active")) {
+                    profile_image.addClass("offline");
+                } else {
+                    profile_image.removeClass();
+                }
+
+                $("#status-options").removeClass("active");
+            });
+        </script>
+    </body>
 </html>

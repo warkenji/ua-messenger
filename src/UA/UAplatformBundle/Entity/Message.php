@@ -47,6 +47,11 @@ class Message
     * @ORM\JoinColumn(nullable=false)
     */
     private $utilisateur;
+    /**
+     * @ORM\ManyToOne(targetEntity="UA\UAplatformBundle\Entity\Groupe", cascade={"persist"},inversedBy="messages")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $groupe;
 
 
     /**
@@ -138,7 +143,26 @@ class Message
      *
      * @return Message
      */
-    public function setUtilisateur(Utilisateur $utilisateur)
+
+
+    /**
+     * Get groupe.
+     *
+     * @return \UA\UserBundle\Entity\Groupe
+     */
+    public function getGroupe()
+    {
+        return $this->groupe;
+    }
+
+    /**
+     * Set utilisateur.
+     *
+     * @param \UA\UserBundle\Entity\Utilisateur $utilisateur
+     *
+     * @return Message
+     */
+    public function setUtilisateur(\UA\UserBundle\Entity\Utilisateur $utilisateur)
     {
         $this->utilisateur = $utilisateur;
 
@@ -146,12 +170,26 @@ class Message
     }
 
     /**
-     * Get Utilisateur
+     * Get utilisateur.
      *
-     * @return Utilisateur
+     * @return \UA\UserBundle\Entity\Utilisateur
      */
     public function getUtilisateur()
     {
         return $this->utilisateur;
+    }
+
+    /**
+     * Set groupe.
+     *
+     * @param \UA\UAplatformBundle\Entity\Groupe $groupe
+     *
+     * @return Message
+     */
+    public function setGroupe(\UA\UAplatformBundle\Entity\Groupe $groupe)
+    {
+        $this->groupe = $groupe;
+
+        return $this;
     }
 }

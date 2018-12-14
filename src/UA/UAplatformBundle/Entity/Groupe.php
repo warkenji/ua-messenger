@@ -49,6 +49,19 @@ class Groupe
      */
     private $public;
 
+    /**
+     * @ORM\OneToMany(targetEntity="UA\UAplatformBundle\Entity\Message", cascade={"persist"},mappedBy="groupe")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $messages;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="UA\UserBundle\Entity\Utilisateur", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $utilistateur;
+
+
 
     /**
      * Get id
@@ -154,5 +167,86 @@ class Groupe
     public function getPublic()
     {
         return $this->public;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->utilistateur = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add message.
+     *
+     * @param \UA\UAplatformBundle\Entity\Message $message
+     *
+     * @return Groupe
+     */
+    public function addMessage(\UA\UAplatformBundle\Entity\Message $message)
+    {
+        $this->messages[] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Remove message.
+     *
+     * @param \UA\UAplatformBundle\Entity\Message $message
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeMessage(\UA\UAplatformBundle\Entity\Message $message)
+    {
+        return $this->messages->removeElement($message);
+    }
+
+    /**
+     * Get messages.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+
+    /**
+     * Add utilistateur.
+     *
+     * @param \UA\UserBundle\Entity\Utilisateur $utilistateur
+     *
+     * @return Groupe
+     */
+    public function addUtilistateur(\UA\UserBundle\Entity\Utilisateur $utilistateur)
+    {
+        $this->utilistateur[] = $utilistateur;
+
+        return $this;
+    }
+
+    /**
+     * Remove utilistateur.
+     *
+     * @param \UA\UserBundle\Entity\Utilisateur $utilistateur
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeUtilistateur(\UA\UserBundle\Entity\Utilisateur $utilistateur)
+    {
+        return $this->utilistateur->removeElement($utilistateur);
+    }
+
+    /**
+     * Get utilistateur.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUtilistateur()
+    {
+        return $this->utilistateur;
     }
 }
