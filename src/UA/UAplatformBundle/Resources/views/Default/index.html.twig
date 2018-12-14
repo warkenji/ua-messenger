@@ -14,10 +14,10 @@
 
         <script>
             $(document).ready(() => {
-                const webSocket = WS.connect("ws://ua-messenger.herokuapp.com:" + $(location).attr('port'));
+                //const webSocket = WS.connect("ws://ua-messenger.herokuapp.com:" + $(location).attr('port'));
 
-                /*const HOST = location.origin.replace(/^http/, 'ws');
-                const webSocket = WS.connect(HOST);*/
+                const host = location.origin.replace(/^http/, 'ws');
+                const webSocket = WS.connect(host);
                 const status = $("#status");
                 //const message = $("#message");
                 //const input = $("#input");
