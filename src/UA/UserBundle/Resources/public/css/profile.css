@@ -1,5 +1,5 @@
 body {
-    background: #F1F3FA;
+    background: #1F365A;
 }
 
 /* Profile container */
@@ -10,7 +10,7 @@ body {
 /* Profile sidebar */
 .profile-sidebar {
     padding: 20px 0 10px 0;
-    background: #fff;
+    background: #2C3E50;
 }
 
 .profile-userpic img {
@@ -29,7 +29,7 @@ body {
 }
 
 .profile-usertitle-name {
-    color: #5a7391;
+    color: #FFF;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 7px;
@@ -37,7 +37,7 @@ body {
 
 .profile-usertitle-job {
     text-transform: uppercase;
-    color: #5b9bd1;
+    color: #F5F5F5;
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 15px;
@@ -57,7 +57,7 @@ body {
 }
 
 .profile-userbuttons .btn:last-child {
-    margin-right: 0px;
+    margin-right: 0;
 }
 
 .profile-usermenu {
@@ -84,8 +84,8 @@ body {
 }
 
 .profile-usermenu ul li a:hover {
-    background-color: #fafcfd;
-    color: #5b9bd1;
+    background-color: #32465A;
+    color: #F5F5F5;
 }
 
 .profile-usermenu ul li.active {
@@ -93,9 +93,9 @@ body {
 }
 
 .profile-usermenu ul li.active a {
-    color: #5b9bd1;
-    background-color: #f6f9fb;
-    border-left: 2px solid #5b9bd1;
+    color: #F5F5F5;
+    background-color: #32465A;
+    border-left: 2px solid #F5F5F5;
     margin-left: -2px;
 }
 
