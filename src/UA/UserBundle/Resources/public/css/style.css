@@ -79,8 +79,7 @@ i{
 
 
 .input-group > :not(:first-child).custom-select, .input-group > :not(:first-child).form-control {
-    border-bottom-left-radius: 2em;
-    border-top-left-radius: 2em;
+    border-radius: 2em;
     padding-left: 50px;
 }
 
