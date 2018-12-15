@@ -49,7 +49,11 @@
 
                         let qui;
                         if(payload.username == null) qui = "Système";
-                        if(payload.username != null) qui = payload.username;
+                        if(payload.username != null){
+                            qui = payload.username;
+                            const quiSuisJe = $("#QuiSuisJe");
+                            quiSuisJe.html(qui);
+                        }
 
                         if(payload.you){
                             $(
@@ -139,7 +143,7 @@
                                     <i class="fa fa-power-off" style="float: right; margin-top: 8%;" aria-hidden="true"></i>
                                 </a>
                             {% else %}
-                                Vous
+                                <span id="QuiSuisJe">Vous</span>
                             {% endif %}
                         </p>
                         <a href="{{ path('u_aplatform_homepage') }}" class="erase">
@@ -214,7 +218,15 @@
             </div>
             <div class="content">
                 <div style="text-align: center" class="contact-profile">
-                    <p style="font-weight: bolder; text-align: center; width: 100%;"># Caste supérieur (MIAGE)</p>
+                    <p style="font-weight: bolder; text-align: center; width: 100%;">
+                        {% if not app.user %}
+                            <a href="{{ path('fos_user_security_login') }}"
+                               class="butn">
+                                Se connecter
+                            </a>
+                        {% endif %}
+                        &nbsp;# Caste supérieur (MIAGE)
+                    </p>
                 </div>
                 <br>
                 <div class="messages">
