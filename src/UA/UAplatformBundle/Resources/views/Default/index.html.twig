@@ -129,12 +129,17 @@
             <div id="sidepanel">
                 <div id="profile">
                     <div class="wrap">
-                        <p>
-                            <a href="{{ path('fos_user_profile') }}">
-                                {{  app.user ? app.user.username : 'Vous' }}
-                            </a>
-                        </p>
                         <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+                        <p>
+                            {% if app.user %}
+                                <a href="{{ path('fos_user_profile_show') }}">
+                                    {{  app.user.username }}
+                                </a>
+                                <a type="button" href="{{ path('fos_user_security_logout') }}" class="btn btn-danger btn-sm">Se déconnecter</a>
+                            {% else %}
+                                Vous
+                            {% endif %}
+                        </p>
                         <a href="{{ path('u_aplatform_homepage') }}" >
                             <i class="fa fa-home" style="float: right; margin-top: 8%;" aria-hidden="true"></i>
                         </a>
