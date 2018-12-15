@@ -132,15 +132,17 @@
                         <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
                         <p>
                             {% if app.user %}
-                                <a href="{{ path('fos_user_profile_show') }}">
+                                <a href="{{ path('fos_user_profile_show') }}" class="erase">
                                     {{  app.user.username }}
                                 </a>
-                                <a type="button" href="{{ path('fos_user_security_logout') }}" class="btn btn-danger btn-sm">Se déconnecter</a>
+                                <a href="{{ path('fos_user_security_logout') }}" class="erase">
+                                    <i class="fa fa-power-off" style="float: right; margin-top: 8%;" aria-hidden="true"></i>
+                                </a>
                             {% else %}
                                 Vous
                             {% endif %}
                         </p>
-                        <a href="{{ path('u_aplatform_homepage') }}" >
+                        <a href="{{ path('u_aplatform_homepage') }}" class="erase">
                             <i class="fa fa-home" style="float: right; margin-top: 8%;" aria-hidden="true"></i>
                         </a>
                         <div id="status-options">
