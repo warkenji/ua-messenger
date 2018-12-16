@@ -21,3 +21,8 @@ security:
                 target:     fos_user_security_login
             remember_me:
                 secret:     %secret%
+
+    access_control:
+        - { path: /.*add$ ,role: ROLE_USER}
+        - { path: /.*edit$ ,role: ROLE_USER}
+        - { path: /.*delete$ ,role: ROLE_USER}

@@ -1,0 +1,10 @@
+<html>
+<h2>Nom du groupe: {{groupe.nom}} </h2>
+
+Eleve dans le groupe:
+{% for user in utilisateurs %}
+    <li> Nom: {{user.nom }} prenom: {{ user.prenom }} </li>
+{% endfor %}
+
+
+</html>

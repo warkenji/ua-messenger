@@ -56,10 +56,10 @@ class Groupe
     private $messages;
 
     /**
-     * @ORM\ManyToMany(targetEntity="UA\UserBundle\Entity\Utilisateur", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="UA\UserBundle\Entity\Utilisateur", cascade={"persist"},inversedBy="groupes")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $utilistateur;
+    private $utilisateurs;
 
 
 
@@ -174,7 +174,7 @@ class Groupe
     public function __construct()
     {
         $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->utilistateur = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -215,38 +215,38 @@ class Groupe
 
 
     /**
-     * Add utilistateur.
+     * Add utilisateur.
      *
-     * @param \UA\UserBundle\Entity\Utilisateur $utilistateur
+     * @param \UA\UserBundle\Entity\Utilisateur $utilisateur
      *
      * @return Groupe
      */
-    public function addUtilistateur(\UA\UserBundle\Entity\Utilisateur $utilistateur)
+    public function addUtilisateur(\UA\UserBundle\Entity\Utilisateur $utilisateur)
     {
-        $this->utilistateur[] = $utilistateur;
+        $this->utilisateurs[] = $utilisateur;
 
         return $this;
     }
 
     /**
-     * Remove utilistateur.
+     * Remove utilisateur.
      *
-     * @param \UA\UserBundle\Entity\Utilisateur $utilistateur
+     * @param \UA\UserBundle\Entity\Utilisateur $utilisateur
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeUtilistateur(\UA\UserBundle\Entity\Utilisateur $utilistateur)
+    public function removeUtilisateur(\UA\UserBundle\Entity\Utilisateur $utilisateur)
     {
-        return $this->utilistateur->removeElement($utilistateur);
+        return $this->utilisateurs->removeElement($utilisateur);
     }
 
     /**
-     * Get utilistateur.
+     * Get utilisateurs.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUtilistateur()
+    public function getUtilisateurs()
     {
-        return $this->utilistateur;
+        return $this->utilisateurs;
     }
 }

@@ -3,6 +3,7 @@
 namespace UA\UAplatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use UA\UserBundle\Entity\Utilisateur;
 
 /**
  * Message
@@ -42,10 +43,15 @@ class Message
      */
     private $typeMessage;
     /**
-    * @ORM\ManyToOne(targetEntity="UA\UserBundle\Entity\User", cascade={"persist"},inversedBy="messages")
+    * @ORM\ManyToOne(targetEntity="UA\UserBundle\Entity\Utilisateur", cascade={"persist"},inversedBy="messages")
     * @ORM\JoinColumn(nullable=false)
     */
-    private $user;
+    private $utilisateur;
+    /**
+     * @ORM\ManyToOne(targetEntity="UA\UAplatformBundle\Entity\Groupe", cascade={"persist"},inversedBy="messages")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $groupe;
 
 
     /**
@@ -131,26 +137,59 @@ class Message
     }
 
     /**
-     * Set user
+     * Set Utilisateur
      *
-     * @param UA\UAplatfomBundle\Entity\User $user
+     * @param Utilisateur $utilisateur
      *
      * @return Message
      */
-    public function setUser(UA\UserBundle\Entity\User $user)
+
+
+    /**
+     * Get groupe.
+     *
+     * @return \UA\UserBundle\Entity\Groupe
+     */
+    public function getGroupe()
     {
-        $this->user = $user;
+        return $this->groupe;
+    }
+
+    /**
+     * Set utilisateur.
+     *
+     * @param \UA\UserBundle\Entity\Utilisateur $utilisateur
+     *
+     * @return Message
+     */
+    public function setUtilisateur(\UA\UserBundle\Entity\Utilisateur $utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get utilisateur.
      *
-     * @return UA\UserBundle\Entity\User
+     * @return \UA\UserBundle\Entity\Utilisateur
      */
-    public function getUser()
+    public function getUtilisateur()
     {
-        return $this->user;
+        return $this->utilisateur;
+    }
+
+    /**
+     * Set groupe.
+     *
+     * @param \UA\UAplatformBundle\Entity\Groupe $groupe
+     *
+     * @return Message
+     */
+    public function setGroupe(\UA\UAplatformBundle\Entity\Groupe $groupe)
+    {
+        $this->groupe = $groupe;
+
+        return $this;
     }
 }

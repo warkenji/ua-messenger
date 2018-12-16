@@ -3,6 +3,7 @@
 namespace UA\UAplatformBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use UA\UserBundle\Entity\Utilisateur;
 
 /**
  * Suggestion
@@ -29,7 +30,7 @@ class Suggestion
     private $message;
 
     /**
-    * @ORM\ManyToOne(targetEntity="UA\UAplatformBundle\Entity\Suggestion", cascade={"persist"},inversedBy="suggestions")
+    * @ORM\ManyToOne(targetEntity="UA\UserBundle\Entity\Utilisateur", cascade={"persist"},inversedBy="suggestions")
     * @ORM\JoinColumn(nullable=false)
     */
     private $user;
@@ -72,11 +73,11 @@ class Suggestion
     /**
      * Set user
      *
-     * @param UA\UAplatfomBundle\Entity\Suggestion $user
+     * @param Utilisateur $user
      *
      * @return Suggestion
      */
-    public function setUser(UA\UAplatfomBundle\Entity\Suggestion $user)
+    public function setUtilisateur(Utilisateur $user)
     {
         $this->user = $user;
 
@@ -86,7 +87,31 @@ class Suggestion
     /**
      * Get user
      *
-     * @return UA\UAplatfomBundle\Entity\Suggestion
+     * @return Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set user.
+     *
+     * @param \UA\UserBundle\Entity\Utilisateur $user
+     *
+     * @return Suggestion
+     */
+    public function setUser(\UA\UserBundle\Entity\Utilisateur $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user.
+     *
+     * @return \UA\UserBundle\Entity\Utilisateur
      */
     public function getUser()
     {

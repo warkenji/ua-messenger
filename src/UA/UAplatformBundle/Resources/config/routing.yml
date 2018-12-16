@@ -1,3 +1,27 @@
 u_aplatform_homepage:
     path:     /
     defaults: { _controller: UAplatformBundle:Default:index }
+
+ua_platform_groupe_index:
+    path: /groupe/index
+    defaults: {_controller: UAplatformBundle:Groupe:index}
+
+ua_platform_groupe_add:
+    path: /groupe/add
+    defaults: {_controller: UAplatformBundle:Groupe:add}
+
+ua_platform_groupe_edit:
+    path: /groupe/edit/{id}
+    defaults: {_controller: UAplatformBundle:Groupe:edit}
+
+ua_platform_groupe_delete:
+    path: /groupe/delete/{id}
+    defaults: {_controller: UAplatformBundle:Groupe:delete}
+
+ua_platform_groupe_addingroup:
+    path: /groupe/addingroup/{id}
+    defaults: {_controller: UAplatformBundle:Groupe:add_in_group}
+
+ua_platform_groupe_view:
+    path: /groupe/view/{id}
+    defaults: {_controller: UAplatformBundle:Groupe:view}

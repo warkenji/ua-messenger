@@ -1,0 +1,13 @@
+<html>
+    <div style="font-size: 24px; margin-top: 100px; margin-left:50px">
+        <h1>Liste des groupes </h1>
+
+                <ul>
+                    {%for gp in groupe  %}
+                        <li> <a href="{{path('ua_platform_groupe_view', {'id' : gp.id})}}"> {{gp.nom}}</a>  <a href="{{path('ua_platform_groupe_delete', {'id' : gp.id})}}"> Supprimer</a> <a href="{{path('ua_platform_groupe_addingroup',{'id':gp.id})}}">  S'inscrire</a></li>
+                    {%endfor  %}
+                </ul>
+    </div>
+
+
+</html>

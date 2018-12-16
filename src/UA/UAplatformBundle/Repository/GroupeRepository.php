@@ -2,6 +2,8 @@
 
 namespace UA\UAplatformBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+
 /**
  * GroupeRepository
  *
@@ -10,4 +12,16 @@ namespace UA\UAplatformBundle\Repository;
  */
 class GroupeRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function display_user($id)
+    {
+        $user[]= array();
+        $sql= $this->createQueryBuilder('a');
+        $sql->where('a.id = :id');
+        $sql->setParameter('id',$id);
+        $sql->innerJoin('a.utilisateurs','u');
+        $sql->addSelect('u');
+        return $sql->getQuery()->getResult();
+
+    }
 }

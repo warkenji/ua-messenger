@@ -10,4 +10,5 @@ namespace UA\UserBundle\Repository;
  */
 class UtilisateurRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }
