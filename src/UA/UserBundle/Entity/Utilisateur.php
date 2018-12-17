@@ -53,14 +53,6 @@ class Utilisateur extends BaseUser
      */
     private $adresse;
 
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection | Groupe[]
-     * @ORM\ManyToMany(targetEntity="UA\UAplatformBundle\Entity\Groupe", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $groupes;
-
     /**
      * @var \Doctrine\Common\Collections\Collection | Message[]
      * @ORM\OneToMany(targetEntity="UA\UAplatformBundle\Entity\Message", cascade={"persist"},mappedBy="utilisateur")
@@ -75,8 +67,12 @@ class Utilisateur extends BaseUser
      */
     private $suggestions;
 
-
-
+    /**
+     * @ORM\ManyToMany(targetEntity="UA\UAplatformBundle\Entity\Groupe", cascade={"persist"}, mappedBy="utilisateurs")
+     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinTable(name="groupe_utilisateur")
+     */
+    private $groupes;
 
     /**
      * Get id
@@ -262,37 +258,13 @@ class Utilisateur extends BaseUser
     }
 
     /**
-     * Set groupe.
-     *
-     * @param \UA\UAplatformBundle\Entity\Groupe $groupe
-     *
-     * @return Utilisateur
-     */
-    public function setGroupe(\UA\UAplatformBundle\Entity\Groupe $groupe)
-    {
-        $this->groupe = $groupe;
-
-        return $this;
-    }
-
-    /**
-     * Get groupe.
-     *
-     * @return \UA\UAplatformBundle\Entity\Groupe
-     */
-    public function getGroupe()
-    {
-        return $this->groupe;
-    }
-
-    /**
      * Remove groupe.
      *
      * @param \UA\UAplatformBundle\Entity\Groupe $groupe
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeGroupe(\UA\UAplatformBundle\Entity\Groupe $groupe)
+    public function removeGroupe(Groupe $groupe)
     {
         return $this->groupes->removeElement($groupe);
     }
