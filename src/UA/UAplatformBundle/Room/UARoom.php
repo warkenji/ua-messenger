@@ -9,7 +9,6 @@ use Ratchet\ConnectionInterface;
 use Ratchet\Wamp\Topic;
 use Gos\Bundle\WebSocketBundle\Router\WampRequest;
 use UA\UserBundle\Entity\Utilisateur;
-use UA\UserBundle\Repository\UtilisateurRepository;
 
 class UARoom implements TopicInterface
 {

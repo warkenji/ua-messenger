@@ -1,4 +1,4 @@
 ua_room:
-    channel: ua/channel
+    channel: ua/channel/{group_id}
     handler:
-        callback: 'ua.room' #related to the getName() of your topic
+        callback: 'ua.room'

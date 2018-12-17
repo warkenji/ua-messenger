@@ -716,3 +716,10 @@ i.fa {
     overflow: hidden;
     color: #fff;
 }
+
+.butn{
+    text-decoration: none !important;
+    color: white !important;
+    border-radius: 2em;
+    background: dodgerblue;
+}

@@ -13,91 +13,146 @@
         <script src="{{ asset('bundles/goswebsocket/js/gos_web_socket_client.js') }}"></script>
 
         <script>
+            let groupeActuel = {{ groupePublic[0].id }};
+            let session = null;
+            
+            function subscribe(groupeId) {
+
+                $('.messages ul').html('');
+                const d = new Date();
+
+                //the callback function in "subscribe" is called everytime an event is published in that channel.
+                session.subscribe("ua/channel/" + groupeId, function (uri, payload) {
+
+                    let qui;
+                    if(payload.username == null) qui = "Système";
+                    if(payload.username != null){
+                        qui = payload.username;
+                        const quiSuisJe = $("#QuiSuisJe");
+                        quiSuisJe.html(qui);
+                    }
+
+                    if(payload.you){
+                        $(
+                            '<li class="sent" style="margin-bottom:10px;">' +
+                                {#{{ app.user.id }} +#}
+                            ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
+                            '<p>' +
+                            '<span style="display:block;">' +
+                            '<b style="font-weight: bold;">Vous</b>' +
+                            '<time> ' +
+                            d.getDate()+'/'+(d.getMonth()+1)+'/'+ d.getFullYear()+ ' ' + d.getHours() + ':'
+                            + d.getMinutes() +
+                            '</time>' +
+                            '</span>' +
+                            '' +
+                            '<span style="display:block;">' +
+                            payload.data +
+                            '</span>' +
+                            '</p>' +
+                            '</li>').appendTo($('.messages ul'));
+                    } else {
+                        $(
+                            '<li class="replies" style="margin-bottom:16px;">' +
+                                {#{{ app.user.id }} + " " + payload.id +#}
+                            ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
+                            '<p>' +
+                            '<span style="display:block;">' +
+                            '<b style="font-weight: bold;">' + qui + '</b>' +
+                            '<time> ' +
+                            d.getDate()+'/'+(d.getMonth()+1)+'/'+ d.getFullYear()+ ' ' + d.getHours() + ':'
+                            + d.getMinutes() +
+                            '</time>' +
+                            '</span>' +
+                            '' +
+                            '<span style="display:block;">' +
+                            payload.data +
+                            '</span>' +
+                            '</p>' +
+                            '</li>').appendTo($('.messages ul'));
+                    }
+
+                    $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+                });
+            }
+
+            function groupClick(idClick) {
+                let ancienGroupe = groupeActuel;
+                groupeActuel = idClick;
+
+                {% for groupe in groupePublic %}
+                    if(groupeActuel === {{ groupe.id }})
+                    {
+                        try {
+                            session.unsubscribe("ua/channel/" + ancienGroupe);
+                        }
+                        catch (e) {
+
+                        }
+
+                        subscribe(groupeActuel);
+                        $('.active[data-groupe-active]').removeClass("active");
+                        $('[data-groupe-active=' + {{ groupe.id }} + ']').addClass("active");
+                        $('#nom-groupe-actuel').html("{{ groupe.nom }}");
+                    }
+                {% endfor %}
+
+                {% if app.user %}
+                {% for groupe in app.user.groupes if groupe not in groupePublic %}
+                    if(groupeActuel === {{ groupe.id }})
+                    {
+                        try {
+                            session.unsubscribe("ua/channel/" + ancienGroupe);
+                        }
+                        catch (e) {
+
+                        }
+
+                        subscribe(groupeActuel);
+                        $('.active[data-groupe-active]').removeClass("active");
+                        $('[data-groupe-active=' + {{ groupe.id }} + ']').addClass("active");
+                        $('#nom-groupe-actuel').html("{{ groupe.nom }}");
+                        $('#nom-groupe-actuel').html("{{ groupe.nom }}");
+                    }
+                {% endfor %}
+                {% endif %}
+            }
+
             $(document).ready(() => {
                 //const webSocket = WS.connect("ws://172.18.195.14:80");
 
-                const webSocket = WS.connect("ws://ua-messenger.herokuapp.com:8888");
+                const webSocket = WS.connect("ws://127.0.0.1:8888");
                 //const host = location.origin.replace(/^http/, 'ws');
                 //const webSocket = WS.connect(host);
                 const status = $("#status");
                 //const message = $("#message");
                 //const input = $("#input");
-                const d = new Date();
 
                 status.html("Status: En attente");
 
-                webSocket.on("socket/connect", function () {
+                webSocket.on("socket/connect", () => {
                     status.text("Successfully Connected!");
                 });
 
-                webSocket.on("socket/disconnect", function (error) {
+                webSocket.on("socket/disconnect", (error) => {
                     status.text("Disconnected for " + error.reason + " with code " + error.code);
                 });
 
-                webSocket.on("socket/connect", function (session) {
+                webSocket.on("socket/connect", (s) => {
+                    session = s;
 
-                    $('.submit').click(function() { newMessage(session); });
+                    $('.submit').click(() => { 
+                        newMessage(session); 
+                    });
 
-                    $(window).on('keydown', function(e) {
+                    $(window).on('keydown', (e) => {
                         if (e.which === 13) {
                             newMessage(session);
                             return false;
                         }
                     });
 
-                    //the callback function in "subscribe" is called everytime an event is published in that channel.
-                    session.subscribe("ua/channel", function (uri, payload) {
-
-                        let qui;
-                        if(payload.username == null) qui = "Système";
-                        if(payload.username != null){
-                            qui = payload.username;
-                            const quiSuisJe = $("#QuiSuisJe");
-                            quiSuisJe.html(qui);
-                        }
-
-                        if(payload.you){
-                            $(
-                                '<li class="sent">' +
-                                    {#{{ app.user.id }} +#}
-                                ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
-                                '<p>' +
-                                '<span>' +
-                                '<b style="font-weight: bold;">Vous</b>' +
-                                '<time> ' +
-                                d.getDate()+'/'+(d.getMonth()+1)+'/'+ d.getFullYear()+ ' ' + d.getHours() + ':'
-                                + d.getMinutes() +
-                                '</time>' +
-                                '</span>' +
-                                '<br><br>' +
-                                '<span>' +
-                                payload.data +
-                                '</span>' +
-                                '</p>' +
-                                '</li>').appendTo($('.messages ul'));
-                        } else {
-                            $(
-                                '<li class="replies">' +
-                                    {#{{ app.user.id }} + " " + payload.id +#}
-                                ' <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />' +
-                                '<p>' +
-                                '<span>' +
-                                '<b style="font-weight: bold;">' + qui + '</b>' +
-                                '<time> ' +
-                                d.getDate()+'/'+(d.getMonth()+1)+'/'+ d.getFullYear()+ ' ' + d.getHours() + ':'
-                                + d.getMinutes() +
-                                '</time>' +
-                                '</span>' +
-                                '<br><br>' +
-                                '<span>' +
-                                payload.data +
-                                '</span>' +
-                                '</p>' +
-                                '</li>').appendTo($('.messages ul'));
-                        }
-
-                        $(".messages").animate({ scrollTop: $(document).height() }, "fast");
-                    });
+                    groupClick(groupeActuel);
                 });
 
 
@@ -114,17 +169,25 @@
                         '<b style="font-weight: bold;">Vous</b>' +
                         '<time> ' + d.getDate()+'/'+(d.getMonth()+1)+'/'+ d.getFullYear()+ '</time>' +
                         '</span>' +
-                        '<br><br>' +
+                        '' +
                         '<span>' +
                         message +
                         '</span>' +
                         '</p>' +
                         '</li>').appendTo($('.messages ul'));*/
 
-                    session.publish("ua/channel", message);
+                    session.publish("ua/channel/" + groupeActuel, message);
                     select_message.val(null);
                     $(".messages").animate({ scrollTop: $(document).height() }, "fast");
                 }
+
+                $("#myInput").on("input", () => {
+                    let value = $(this).val().toLowerCase();
+
+                    $(".nomGroupe").filter(() => {
+                        $(this).toggle($(this).find("p.name").text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
             });
         </script>
     </head>
@@ -137,17 +200,17 @@
                         <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
                         <p>
                             {% if app.user %}
-                                <a href="{{ path('fos_user_profile_show') }}" class="erase">
+                                <a href="{{ path('fos_user_profile_show') }}" class="erase" style="color: white !important; text-decoration: none !important;">
                                     {{  app.user.username }}
                                 </a>
-                                <a href="{{ path('fos_user_security_logout') }}" class="erase">
+                                <a href="{{ path('fos_user_security_logout') }}" class="erase" style="color: white !important;">
                                     <i class="fa fa-power-off" style="float: right; margin-top: 8%;" aria-hidden="true"></i>
                                 </a>
                             {% else %}
                                 <span id="QuiSuisJe">Vous</span>
                             {% endif %}
                         </p>
-                        <a href="{{ path('u_aplatform_homepage') }}" class="erase">
+                        <a href="{{ path('u_aplatform_homepage') }}" class="erase" style="color: white !important;">
                             <i class="fa fa-home" style="float: right; margin-top: 8%;" aria-hidden="true"></i>
                         </a>
                         <div id="status-options">
@@ -162,11 +225,11 @@
                 </div>
                 <div id="search">
                     <label><i class="fa fa-search" aria-hidden="true"></i></label>
-                    <input type="text" placeholder="Chercher un groupe..." />
+                    <input type="text" id="myInput" placeholder="Chercher un groupe..." />
                 </div>
                 <div id="contacts">
                     <ul>
-                        <li class="contact">
+                        {#<li class="contact">
                             <div class="wrap">
                                 <span class="contact-status online" style="margin-top: 1.5%;"></span>
                                 <div class="meta">
@@ -191,31 +254,34 @@
                                     <p class="name"  style="margin-left: 18%;">Théâtre&nbsp;&nbsp;><i class="fa fa-unlock"  style="float: right;" aria-hidden="true"></i></p>
                                 </div>
                             </div>
-                        </li>
+                        </li>#}
+
                         {% for groupe in groupePublic %}
-                            <li class="contact active">
+                            <li class="contact nomGroupe" data-groupe-active="{{ groupe.id }}" onclick="groupClick({{ groupe.id }})">
                                 <div class="wrap">
-                                    <span class="contact-status busy" style="margin-top: 1.5%;"></span>
+                                    <span class="contact-status online" style="margin-top: 1.5%;"></span>
                                     <div class="meta">
-                                        <p class="name"  style="margin-left: 18%;">{{ groupe.nom }}&nbsp;&nbsp;><i class="fa fa-unlock"  style="float: right;" aria-hidden="true"></i></p>
+                                        <p class="name" style="margin-left: 18%;">{{ groupe.nom }}&nbsp;&nbsp;><i class="fa fa-unlock"  style="float: right;" aria-hidden="true"></i></p>
                                     </div>
                                 </div>
                             </li>
                         {% endfor %}
 
-                        {% for groupe in app.user.groupes if groupe not in groupePublic %}
-                            <li class="contact active">
-                                <div class="wrap">
-                                    <span class="contact-status busy" style="margin-top: 1.5%;"></span>
-                                    <div class="meta">
-                                        <p class="name"  style="margin-left: 18%;">{{ groupe.nom }}&nbsp;&nbsp;><i class="fa fa-lock"  style="float: right;" aria-hidden="true"></i></p>
+                        {% if app.user %}
+                            {% for groupe in app.user.groupes if groupe not in groupePublic %}
+                                <li class="contact nomGroupe" data-groupe-active="{{ groupe.id }}" onclick="groupClick({{ groupe.id }})">
+                                    <div class="wrap">
+                                        <span class="contact-status online" style="margin-top: 1.5%;"></span>
+                                        <div class="meta">
+                                            <p class="name"  style="margin-left: 18%;">{{ groupe.nom }}&nbsp;&nbsp;><i class="fa fa-lock"  style="float: right;" aria-hidden="true"></i></p>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        {% endfor %}
+                                </li>
+                            {% endfor %}
+                        {% endif %}
 
 
-                        <li class="contact active">
+                        {#<li class="contact active">
                             <div class="wrap">
                                 <span class="contact-status busy" style="margin-top: 1.5%;"></span>
                                 <div class="meta">
@@ -231,98 +297,38 @@
                                     <p class="name"  style="margin-left: 18%;">Master Informatique&nbsp;&nbsp;><i class="fa fa-lock"  style="float: right;" aria-hidden="true"></i></p>
                                 </div>
                             </div>
-                        </li>
+                        </li>#}
                     </ul>
                 </div>
                 <div id="bottom-bar">
-                    <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Ajouter un groupe</span></button>
+                    <a href="{{ path('ua_platform_groupe_add') }}">
+                        <button id="addcontact">
+                            <i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Ajouter un groupe</span>
+                        </button>
+                    </a>
                     <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Paramètres</span></button>
                 </div>
             </div>
             <div class="content">
                 <div style="text-align: center" class="contact-profile">
-                    <p style="font-weight: bolder; text-align: center; width: 100%;">
-                        {% if not app.user %}
+                    <div style="font-weight: bolder; text-align: center; width: 100%;">
+                        <span>{% if not app.user %}
                             <a href="{{ path('fos_user_security_login') }}"
-                               class="butn">
+                               style="text-decoration: none !important;color: white !important;border-radius: 2em;background: dodgerblue;padding: 8px;">
                                 Se connecter
                             </a>
-                        {% endif %}
-                        &nbsp;# Caste supérieur (MIAGE)
-                    </p>
+                        {% endif %}</span>
+                        # <span id="nom-groupe-actuel"></span>
+                    </div>
                 </div>
-                <br>
+                
                 <div class="messages">
                     <p id="status">Status:</p>
                     <ul>
-                        {#<li class="sent">
-                            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-                            <p>
-                                <span>
-                                    <b style="font-weight: bold;">Jébédia</b>
-                                    <time datetime="2018-12-11">11/12/2018</time>
-                                </span>
-                                <br><br>
-                                <span>
-                                    Hé ! J'ai vu un M2 sortir en sueur de la salle 202 xD !
-                                </span>
-                            </p>
-                        </li>
-                        <li class="replies">
-                            <img src="{{ asset('bundles/user/img/julien.jpg') }}" alt="" />
-                            <p>
-                                <span>
-                                    <b style="font-weight: bold;">Ezekiel</b>
-                                    <time datetime="2018-12-11">11/12/2018</time>
-                                </span>
-                                <br><br>
-                                <span>
-                                    C'est tellement des sous-hommes ces M2 !
-                                </span>
-                            </p>
-                        </li>
-                        <li class="replies">
-                            <img src="{{ asset('bundles/user/img/julien.jpg') }}" alt="" />
-                            <p>
-                                <span>
-                                    <b style="font-weight: bold;">Ezekiel</b>
-                                    <time datetime="2018-12-11">11/12/2018</time>
-                                </span>
-                                <br><br>
-                                <span>😂😂🤣🤣🤣</span>
-                            </p>
-                        </li>
-                        <li class="sent">
-                            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
-
-                            <p>
-                                <span>
-                                    <b style="font-weight: bold;">Jébédia</b>
-                                    <time datetime="2018-12-11">11/12/2018</time>
-                                </span>
-                                <br><br>
-                                <span>
-                                    Ouais, et ils ont un même un belge 🍟.
-                                </span>
-                            </p>
-                        </li>
-                        <li class="replies">
-                            <img src="{{ asset('bundles/user/img/julien.jpg') }}" alt="" />
-                            <p>
-                                <span>
-                                    <b style="font-weight: bold;">Ezekiel</b>
-                                    <time datetime="2018-12-11">11/12/2018</time>
-                                </span>
-                                <br><br>
-                                <span>
-                                    Aucune dignité franchement !
-                                </span>
-                            </p>
-                        </li>#}
                     </ul>
-                    <br><br><br>
+                    
                 </div>
-                <br><br><br>
+                
                 <div class="message-input">
                     <div class="wrap">
                         <input type="text" placeholder="Ecriver votre message..." />
@@ -334,18 +340,20 @@
         </div>
 
         <script >
-            $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+            $(".messages").animate({ 
+                scrollTop: $(document).height() 
+            }, "fast");
 
-            $("#profile-img").click(function() {
+            $("#profile-img").click(() => {
                 $("#status-options").toggleClass("active");
             });
 
-            $(".expand-button").click(function() {
+            $(".expand-button").click(() => {
                 $("#profile").toggleClass("expanded");
                 $("#contacts").toggleClass("expanded");
             });
 
-            $("#status-options ul li").click(function() {
+            $("#status-options ul li").click(() => {
                 let status_online = $("#status-online");
                 let status_away = $("#status-away");
                 let profile_image = $("#profile-img");
