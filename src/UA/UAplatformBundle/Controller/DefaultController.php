@@ -8,6 +8,8 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('UAplatformBundle:Default:index.html.twig');
+        $em=$this->getDoctrine()->getManager();
+        $groupe=$em->getRepository('UAplatformBundle:Groupe')->findBy(array('public'=>true));
+        return $this->render('UAplatformBundle:Default:index.html.twig', array('groupePublic' => $groupe));
     }
 }

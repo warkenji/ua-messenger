@@ -192,6 +192,28 @@
                                 </div>
                             </div>
                         </li>
+                        {% for groupe in groupePublic %}
+                            <li class="contact active">
+                                <div class="wrap">
+                                    <span class="contact-status busy" style="margin-top: 1.5%;"></span>
+                                    <div class="meta">
+                                        <p class="name"  style="margin-left: 18%;">{{ groupe.nom }}&nbsp;&nbsp;><i class="fa fa-unlock"  style="float: right;" aria-hidden="true"></i></p>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+
+                        {% for groupe in app.user.groupes if groupe not in groupePublic %}
+                            <li class="contact active">
+                                <div class="wrap">
+                                    <span class="contact-status busy" style="margin-top: 1.5%;"></span>
+                                    <div class="meta">
+                                        <p class="name"  style="margin-left: 18%;">{{ groupe.nom }}&nbsp;&nbsp;><i class="fa fa-lock"  style="float: right;" aria-hidden="true"></i></p>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+
 
                         <li class="contact active">
                             <div class="wrap">

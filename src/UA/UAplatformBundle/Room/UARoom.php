@@ -103,7 +103,7 @@ class UARoom implements TopicInterface
      * @param ConnectionInterface $connection
      * @param Topic $topic
      * @param WampRequest $request
-     * @param $data
+     * @param $rawData
      * @param array $exclude
      * @param array $eligibles
      * @return mixed|void
